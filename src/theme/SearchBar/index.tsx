@@ -1,5 +1,5 @@
-import React, {useEffect, useRef} from 'react';
-import {SearchButton} from '../SearchButton';
+import React, { useEffect, useRef } from 'react';
+import { SearchButton } from '../SearchButton';
 
 declare global {
   interface Window {

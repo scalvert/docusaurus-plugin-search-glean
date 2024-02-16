@@ -1,15 +1,15 @@
-import {normalizeUrl} from '@docusaurus/utils';
+import { normalizeUrl } from '@docusaurus/utils';
 
-import type {LoadContext, Plugin} from '@docusaurus/types';
-import type {ThemeConfig} from 'docusaurus-plugin-search-glean';
+import type { LoadContext, Plugin } from '@docusaurus/types';
+import type { ThemeConfig } from 'docusaurus-plugin-search-glean';
 
 export default function searchGlean(context: LoadContext): Plugin<void> {
   const {
     baseUrl,
-    siteConfig: {title, url, favicon, themeConfig},
+    siteConfig: { themeConfig },
   } = context;
   const {
-    glean: {searchPagePath},
+    glean: { searchPagePath },
   } = themeConfig as ThemeConfig;
 
   return {
@@ -23,7 +23,7 @@ export default function searchGlean(context: LoadContext): Plugin<void> {
       return '../src/theme';
     },
 
-    contentLoaded({actions: {addRoute}}) {
+    contentLoaded({ actions: { addRoute } }) {
       if (searchPagePath) {
         addRoute({
           path: normalizeUrl([baseUrl, searchPagePath]),

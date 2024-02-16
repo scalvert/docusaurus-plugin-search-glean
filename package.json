@@ -8,8 +8,7 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/facebook/docusaurus.git",
-    "directory": "packages/docusaurus-theme-search-algolia"
+    "url": "https://github.com/scalvert/docusaurus-plugin-search-glean.git"
   },
   "license": "MIT",
   "author": "Steve Calvert <steve.calvert@gmail.com>",
@@ -30,20 +29,29 @@
   "types": "src/index.d.ts",
   "scripts": {
     "build": "tsc --build",
-    "build:watch": "tsc --build --watch"
+    "build:watch": "tsc --build --watch",
+    "format": "prettier --write ./src"
   },
-  "dependencies": {},
   "devDependencies": {
     "@docusaurus/core": "^3.0.0",
     "@docusaurus/module-type-aliases": "^3.0.0",
     "@docusaurus/types": "^3.0.0",
     "@docusaurus/utils": "^3.0.0",
     "@docusaurus/utils-validation": "^3.0.0",
+    "prettier": "^3.2.5",
     "react": "^18.0.2",
     "react-dom": "^18.0.2"
   },
+  "peerDependencies": {
+    "@docusaurus/core": ">=3.0.0",
+    "@docusaurus/utils": ">=3.0.0",
+    "@docusaurus/utils-validation": ">=3.0.0",
+    "react": ">=18.2.0",
+    "react-dom": ">=18.2.0"
+  },
   "volta": {
-    "node": "18.19.1"
+    "node": "18.19.1",
+    "npm": "9.9.2"
   },
   "publishConfig": {
     "access": "public"
