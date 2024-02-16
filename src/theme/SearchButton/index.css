@@ -1,0 +1,98 @@
+:root {
+  --search-local-icon-stroke-width: 1.4;
+
+  /* searchbox */
+  --search-local-searchbox-shadow: inset 0 0 0 2px var(--ifm-color-primary);
+
+  /* key */
+  --search-local-key-gradient: linear-gradient(
+    -225deg,
+    rgb(213, 219, 228) 0%,
+    rgb(248, 248, 248) 100%
+  );
+  --search-local-key-shadow: inset 0 -2px 0 0 rgb(205, 205, 230),
+    inset 0 0 1px 1px #fff, 0 1px 2px 1px rgba(30, 35, 90, 0.4);
+}
+
+/* Darkmode */
+
+html[data-theme="dark"] {
+  --search-local-key-gradient: linear-gradient(
+    -26.5deg,
+    rgb(86, 88, 114) 0%,
+    rgb(49, 53, 91) 100%
+  );
+
+  --search-local-key-shadow: inset 0 -2px 0 0 rgb(40, 45, 85),
+    inset 0 0 1px 1px rgb(81, 87, 125), 0 2px 2px 0 rgba(3, 4, 9, 0.3);
+}
+
+.DocSearch-Button {
+  align-items: center;
+  background: var(--ifm-navbar-search-input-background-color);
+  border: 0;
+  border-radius: 40px;
+  color: var(--ifm-navbar-search-input-color);
+  cursor: pointer;
+  display: flex;
+  font-weight: 500;
+  height: 36px;
+  justify-content: space-between;
+  margin: 0 0 0 16px;
+  padding: 0 8px;
+  user-select: none;
+}
+
+.DocSearch-Button:hover,
+.DocSearch-Button:active,
+.DocSearch-Button:focus {
+  box-shadow: var(--search-local-searchbox-shadow);
+  outline: none;
+}
+
+.DocSearch-Button-Container {
+  align-items: center;
+  display: flex;
+}
+
+.DocSearch-Search-Icon {
+  stroke-width: 1.6;
+}
+
+.DocSearch-Button .DocSearch-Search-Icon {
+  color: var(--ifm-font-color-base);
+}
+
+.DocSearch-Button-Placeholder {
+  font-size: 1rem;
+  padding: 0 12px 0 6px;
+}
+
+.DocSearch-Button-Keys {
+  display: flex;
+  min-width: calc(2 * 20px + 2 * 0.4em);
+  margin-right: 6px;
+}
+
+.DocSearch-Button-Key {
+  align-items: center;
+  background: var(--search-local-key-gradient);
+  border-radius: 3px;
+  box-shadow: var(--search-local-key-shadow);
+  color: var(--ifm-color-secondary-darkest);
+  display: flex;
+  height: 18px;
+  justify-content: center;
+  margin-right: 0.4em;
+  padding-bottom: 2px;
+  position: relative;
+  top: -1px;
+  width: 20px;
+}
+
+@media (max-width: 750px) {
+  .DocSearch-Button-Keys,
+  .DocSearch-Button-Placeholder {
+    display: none;
+  }
+}
