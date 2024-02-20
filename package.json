@@ -27,6 +27,11 @@
   },
   "main": "lib/index.js",
   "types": "src/index.d.ts",
+  "files": [
+    "lib",
+    "CHANGELOG.md",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc --build",
     "build:watch": "tsc --build --watch",
