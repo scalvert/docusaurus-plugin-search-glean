@@ -1,5 +1,5 @@
 {
-  "name": "docusaurus-plugin-glean-search",
+  "name": "docusaurus-plugin-search-glean",
   "version": "0.0.1",
   "description": "A Docusaurus plugin for Glean modal search",
   "keywords": [
@@ -21,7 +21,7 @@
       "default": "./lib/client/index.js"
     },
     ".": {
-      "types": "./src/theme-search-algolia.d.ts",
+      "types": "./src/plugin-search-glean.d.ts",
       "default": "./lib/index.js"
     }
   },
@@ -38,9 +38,11 @@
     "@docusaurus/types": "^3.0.0",
     "@docusaurus/utils": "^3.0.0",
     "@docusaurus/utils-validation": "^3.0.0",
+    "@release-it-plugins/lerna-changelog": "^5.0.0",
     "prettier": "^3.2.5",
     "react": "^18.0.2",
-    "react-dom": "^18.0.2"
+    "react-dom": "^18.0.2",
+    "release-it": "^15.5.0"
   },
   "peerDependencies": {
     "@docusaurus/core": ">=3.0.0",
@@ -57,6 +59,22 @@
     "npm": "9.9.2"
   },
   "publishConfig": {
-    "access": "public"
+    "access": "public",
+    "registry": "https://registry.npmjs.org"
+  },
+  "release-it": {
+    "plugins": {
+      "@release-it-plugins/lerna-changelog": {
+        "infile": "CHANGELOG.md",
+        "launchEditor": true
+      }
+    },
+    "git": {
+      "tagName": "v${version}"
+    },
+    "github": {
+      "release": true,
+      "tokenRef": "GITHUB_AUTH"
+    }
   }
 }
