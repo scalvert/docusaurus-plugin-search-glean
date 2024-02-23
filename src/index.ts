@@ -3,6 +3,7 @@ import type { LoadContext, Plugin } from '@docusaurus/types';
 import { ThemeConfig } from './types';
 
 export default function searchGlean(context: LoadContext): Plugin<void> {
+  debugger;
   const {
     baseUrl,
     siteConfig: { themeConfig },

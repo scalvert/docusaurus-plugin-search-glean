@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import Head from '@docusaurus/Head';
 import Layout from '@theme/Layout';
 
+import './index.css';
 import { useTitleFormatter } from '../../utils';
 
 export default function ChatPage(): JSX.Element {
