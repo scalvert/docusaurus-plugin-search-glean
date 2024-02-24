@@ -1,6 +1,6 @@
 {
   "name": "docusaurus-plugin-search-glean",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "A Docusaurus plugin for Glean modal search",
   "keywords": [
     "docusaurus",
