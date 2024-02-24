@@ -3,7 +3,6 @@ import Head from '@docusaurus/Head';
 import Layout from '@theme/Layout';
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
-import './index.css';
 import { useTitleFormatter } from '../../utils';
 import { ThemeConfig } from '../../types';
 
@@ -33,7 +32,7 @@ export default function ChatPage(): JSX.Element {
       <div
         ref={containerRef}
         style={{
-          height: '100%',
+          height: '100vh',
           width: '100%',
           position: 'relative',
         }}
