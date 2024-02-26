@@ -3,18 +3,29 @@ import type { OptionValidationContext } from '@docusaurus/types';
 import { ChatOptions, ModalSearchOptions } from './types';
 
 export type PluginOptions = {
-  sdkUrl?: string;
-  searchOptions?: Partial<ModalSearchOptions>;
-  chatOptions?: Partial<ChatOptions>;
+  sdkUrl: string;
+  chatPagePath: string;
+  searchOptions: Partial<ModalSearchOptions>;
+  chatOptions: Partial<ChatOptions>;
 };
 
-export type Options = PluginOptions;
+export type Options = Partial<PluginOptions>;
 
 export const DEFAULT_PLUGIN_OPTIONS: PluginOptions = {
   sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
-  searchOptions: {},
+  chatPagePath: 'chat',
+  searchOptions: {
+    datasourcesFilter: ['github'],
+  },
   chatOptions: {},
 };
+
+export function normalizePluginOptions(options: Options): PluginOptions {
+  return {
+    ...DEFAULT_PLUGIN_OPTIONS,
+    ...options,
+  };
+}
 
 const AuthTokenDetailsSchema = Joi.object({
   expirationTime: Joi.number().required(),

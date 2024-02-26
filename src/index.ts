@@ -1,11 +1,11 @@
 import { normalizeUrl } from '@docusaurus/utils';
 import type { LoadContext, Plugin } from '@docusaurus/types';
-import { PluginOptions, DEFAULT_PLUGIN_OPTIONS } from './options';
+import { Options, normalizePluginOptions } from './options';
 
-export default function searchGlean(context: LoadContext, options: PluginOptions): Plugin<void> {
+export default function searchGlean(context: LoadContext, options: Options): Plugin<void> {
   const { baseUrl } = context;
 
-  options = { ...DEFAULT_PLUGIN_OPTIONS, ...options };
+  options = normalizePluginOptions(options);
 
   return {
     name: 'docusaurus-plugin-search-glean',
@@ -21,9 +21,9 @@ export default function searchGlean(context: LoadContext, options: PluginOptions
     contentLoaded({ actions: { addRoute, setGlobalData } }) {
       setGlobalData(options);
 
-      if (options.chatOptions) {
+      if (options.chatPagePath) {
         addRoute({
-          path: normalizeUrl([baseUrl, 'chat']),
+          path: normalizeUrl([baseUrl, options.chatPagePath]),
           component: '@theme/ChatPage',
           exact: true,
         });
