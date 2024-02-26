@@ -18,9 +18,3 @@ export function useTitleFormatter(title?: string | undefined): string {
   const { title: siteTitle, titleDelimiter } = siteConfig;
   return title?.trim().length ? `${title.trim()} ${titleDelimiter} ${siteTitle}` : siteTitle;
 }
-
-export function usePluginData<T>() {
-  const { globalData } = useDocusaurusContext();
-
-  return globalData['docusaurus-plugin-search-glean'] as T;
-}

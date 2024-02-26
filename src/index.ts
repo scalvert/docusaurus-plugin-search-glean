@@ -19,7 +19,7 @@ export default function searchGlean(context: LoadContext, options: Options): Plu
     },
 
     contentLoaded({ actions: { addRoute, setGlobalData } }) {
-      setGlobalData(options);
+      setGlobalData({ options });
 
       if (options.chatPagePath) {
         addRoute({
