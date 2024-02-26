@@ -13,7 +13,7 @@ export default function ChatPage(): JSX.Element {
   useEffect(() => {
     if (!window.EmbeddedSearch) return;
 
-    window.EmbeddedSearch.renderChat(containerRef.current!, options.chatOptions);
+    window.EmbeddedSearch.renderChat(containerRef.current!, options.chatOptions!);
   }, [containerRef.current]);
 
   return (
