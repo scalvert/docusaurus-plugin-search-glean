@@ -15,7 +15,7 @@ export default function SearchBarWrapper() {
 
   const mergedSearchOptions = {
     ...DEFAULT_SEARCH_OPTIONS,
-    ...options.searchOptions,
+    ...(options.searchOptions || {}),
   } as ModalSearchOptions;
 
   useEffect(() => {

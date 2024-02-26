@@ -3,7 +3,7 @@ import type { OptionValidationContext } from '@docusaurus/types';
 import { ChatOptions, ModalSearchOptions } from './types';
 
 export type PluginOptions = {
-  sdkUrl: string;
+  sdkUrl?: string;
   searchOptions?: Partial<ModalSearchOptions>;
   chatOptions?: Partial<ChatOptions>;
 };
