@@ -35,7 +35,8 @@
   "scripts": {
     "build": "tsc --build && node ./scripts/copyUntypedFiles.mjs",
     "build:watch": "tsc --build --watch",
-    "format": "prettier --write ./src"
+    "format": "prettier --write ./src",
+    "release": "npm run build && release-it"
   },
   "devDependencies": {
     "@docusaurus/core": "^3.0.0",

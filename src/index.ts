@@ -1,16 +1,11 @@
 import { normalizeUrl } from '@docusaurus/utils';
 import type { LoadContext, Plugin } from '@docusaurus/types';
-import { ThemeConfig } from './types';
+import { PluginOptions, DEFAULT_PLUGIN_OPTIONS } from './options';
 
-export default function searchGlean(context: LoadContext): Plugin<void> {
-  debugger;
-  const {
-    baseUrl,
-    siteConfig: { themeConfig },
-  } = context;
-  const {
-    glean: { chatOptions },
-  } = themeConfig as ThemeConfig;
+export default function searchGlean(context: LoadContext, options: PluginOptions): Plugin<void> {
+  const { baseUrl } = context;
+
+  options = { ...DEFAULT_PLUGIN_OPTIONS, ...options };
 
   return {
     name: 'docusaurus-plugin-search-glean',
@@ -24,7 +19,7 @@ export default function searchGlean(context: LoadContext): Plugin<void> {
     },
 
     contentLoaded({ actions: { addRoute } }) {
-      if (chatOptions) {
+      if (options.chatOptions) {
         addRoute({
           path: normalizeUrl([baseUrl, 'chat']),
           component: '@theme/ChatPage',
@@ -40,7 +35,7 @@ export default function searchGlean(context: LoadContext): Plugin<void> {
             tagName: 'script',
             attributes: {
               async: true,
-              src: 'https://app.glean.com/embedded-search-latest.min.js',
+              src: options.sdkUrl,
             },
           },
         ],
@@ -48,3 +43,5 @@ export default function searchGlean(context: LoadContext): Plugin<void> {
     },
   };
 }
+
+export { validateOptions } from './options';

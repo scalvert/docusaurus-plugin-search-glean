@@ -1,7 +1,9 @@
 import React, { useEffect, useRef } from 'react';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { usePluginData } from '@docusaurus/useGlobalData';
+
 import { SearchButton } from '../SearchButton';
-import { ThemeConfig } from '../../types';
+import { PluginOptions } from '../../options';
+import { ModalSearchOptions } from '../../types';
 
 const DEFAULT_SEARCH_OPTIONS = {
   dataSourceFilter: ['github'],
@@ -9,15 +11,12 @@ const DEFAULT_SEARCH_OPTIONS = {
 
 export default function SearchBarWrapper() {
   const containerRef = useRef<HTMLSpanElement>(null);
-  const { siteConfig } = useDocusaurusContext();
-  const {
-    glean: { searchOptions },
-  } = siteConfig.themeConfig as ThemeConfig;
+  const options = usePluginData('docusaurus-plugin-search-glean') as PluginOptions;
 
   const mergedSearchOptions = {
     ...DEFAULT_SEARCH_OPTIONS,
-    ...searchOptions,
-  };
+    ...options.searchOptions,
+  } as ModalSearchOptions;
 
   useEffect(() => {
     if (!window.EmbeddedSearch) return;
