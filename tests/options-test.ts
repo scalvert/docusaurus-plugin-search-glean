@@ -11,24 +11,18 @@ function testValidateOptions(options: Options) {
 }
 
 describe('PluginOptions validation', () => {
-  it('throws for undefined options', () => {
-    // @ts-expect-error: TS should error
-    expect(() => testValidateOptions(undefined)).toThrowErrorMatchingInlineSnapshot(`[ValidationError: "sdkUrl" is required]`);
-  });
-
   it('throws for null options', () => {
     // @ts-expect-error: TS should error
-    expect(() => testValidateOptions(null)).toThrowErrorMatchingInlineSnapshot(`[ValidationError: "value" must be of type object]`);
-  });
-
-  it('validates missing sdkUrl', () => {
-    const options = {} as unknown as Options;
-    expect(() => testValidateOptions(options)).toThrowErrorMatchingInlineSnapshot(`[ValidationError: "sdkUrl" is required]`);
+    expect(() => testValidateOptions(null)).toThrowErrorMatchingInlineSnapshot(
+      `[ValidationError: "value" must be of type object]`,
+    );
   });
 
   it('validates sdkUrl format', () => {
     const options = { sdkUrl: 'not-a-valid-url' };
-    expect(() => testValidateOptions(options)).toThrowErrorMatchingInlineSnapshot(`[ValidationError: "sdkUrl" must be a valid uri]`);
+    expect(() => testValidateOptions(options)).toThrowErrorMatchingInlineSnapshot(
+      `[ValidationError: "sdkUrl" must be a valid uri]`,
+    );
   });
 
   it('validates partial searchOptions without throwing', () => {

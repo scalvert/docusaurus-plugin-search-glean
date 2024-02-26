@@ -76,7 +76,7 @@ const ChatOptionsSchema = commonOptionsSchema.keys({
 });
 
 const PluginOptionsSchema = Joi.object({
-  sdkUrl: Joi.string().uri().default(DEFAULT_PLUGIN_OPTIONS.sdkUrl).required(),
+  sdkUrl: Joi.string().uri().default(DEFAULT_PLUGIN_OPTIONS.sdkUrl),
   searchOptions: ModalSearchOptionsSchema.default(DEFAULT_PLUGIN_OPTIONS.searchOptions),
   chatOptions: ChatOptionsSchema.default(DEFAULT_PLUGIN_OPTIONS.chatOptions),
 });

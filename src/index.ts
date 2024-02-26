@@ -18,7 +18,9 @@ export default function searchGlean(context: LoadContext, options: PluginOptions
       return '../src/theme';
     },
 
-    contentLoaded({ actions: { addRoute } }) {
+    contentLoaded({ actions: { addRoute, setGlobalData } }) {
+      setGlobalData(options);
+
       if (options.chatOptions) {
         addRoute({
           path: normalizeUrl([baseUrl, 'chat']),
