@@ -21,6 +21,8 @@ export default function searchGlean(context: LoadContext, options: Options): Plu
     contentLoaded({ actions: { addRoute, setGlobalData } }) {
       setGlobalData({ options });
 
+      if (!options.chatOptions) return;
+
       if (options.chatPagePath) {
         addRoute({
           path: normalizeUrl([baseUrl, options.chatPagePath]),

@@ -1,30 +1,28 @@
 import Joi from 'joi';
 import type { OptionValidationContext } from '@docusaurus/types';
 import { ChatOptions, ModalSearchOptions } from './types';
+import merge from 'lodash/merge';
 
 export type PluginOptions = {
   sdkUrl: string;
+  searchOptions: Partial<ModalSearchOptions> | false;
+  chatOptions: Partial<ChatOptions> | false;
   chatPagePath: string;
-  searchOptions: Partial<ModalSearchOptions>;
-  chatOptions: Partial<ChatOptions>;
 };
 
 export type Options = Partial<PluginOptions>;
 
 export const DEFAULT_PLUGIN_OPTIONS: PluginOptions = {
   sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
-  chatPagePath: 'chat',
   searchOptions: {
     datasourcesFilter: ['github'],
   },
   chatOptions: {},
+  chatPagePath: 'chat',
 };
 
 export function normalizePluginOptions(options: Options): PluginOptions {
-  return {
-    ...DEFAULT_PLUGIN_OPTIONS,
-    ...options,
-  };
+  return merge({}, DEFAULT_PLUGIN_OPTIONS, options);
 }
 
 const AuthTokenDetailsSchema = Joi.object({
@@ -88,8 +86,13 @@ const ChatOptionsSchema = commonOptionsSchema.keys({
 
 const PluginOptionsSchema = Joi.object({
   sdkUrl: Joi.string().uri().default(DEFAULT_PLUGIN_OPTIONS.sdkUrl),
-  searchOptions: ModalSearchOptionsSchema.default(DEFAULT_PLUGIN_OPTIONS.searchOptions),
-  chatOptions: ChatOptionsSchema.default(DEFAULT_PLUGIN_OPTIONS.chatOptions),
+  searchOptions: Joi.alternatives()
+    .try(ModalSearchOptionsSchema, Joi.boolean().valid(false))
+    .default(DEFAULT_PLUGIN_OPTIONS.searchOptions),
+  chatOptions: Joi.alternatives()
+    .try(ChatOptionsSchema, Joi.boolean().valid(false))
+    .default(DEFAULT_PLUGIN_OPTIONS.chatOptions),
+  chatPagePath: Joi.string().default(DEFAULT_PLUGIN_OPTIONS.chatPagePath),
 });
 
 export function validateOptions({

@@ -36,6 +36,17 @@ describe('PluginOptions validation', () => {
     });
   });
 
+  it('validates searchOptions can be false without throwing', () => {
+    const options = {
+      sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
+      searchOptions: false,
+    };
+    expect(testValidateOptions(options)).toMatchObject({
+      sdkUrl: expect.any(String),
+      searchOptions: false,
+    });
+  });
+
   it('validates partial chatOptions without throwing', () => {
     const options = {
       sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
@@ -44,6 +55,17 @@ describe('PluginOptions validation', () => {
     expect(testValidateOptions(options)).toMatchObject({
       sdkUrl: expect.any(String),
       chatOptions: expect.any(Object),
+    });
+  });
+
+  it('validates chatOptions can be false without throwing', () => {
+    const options = {
+      sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
+      chatOptions: false,
+    };
+    expect(testValidateOptions(options)).toMatchObject({
+      sdkUrl: expect.any(String),
+      chatOptions: false,
     });
   });
 

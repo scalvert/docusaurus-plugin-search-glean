@@ -9,6 +9,8 @@ export default function SearchBarWrapper() {
   const containerRef = useRef<HTMLSpanElement>(null);
   const { options } = usePluginData('docusaurus-plugin-search-glean') as { options: PluginOptions };
 
+  if (!options.searchOptions) return null;
+
   useEffect(() => {
     if (!window.EmbeddedSearch) return;
 
