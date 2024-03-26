@@ -53,6 +53,11 @@ export interface ChatCustomizations {
   container?: BoxCustomizations;
 }
 
+export type FilterValue = {
+  key: string;
+  value: string;
+};
+
 export interface ModalSearchOptions {
   authToken?: AuthTokenDetails;
   backend?: string;
@@ -62,6 +67,7 @@ export interface ModalSearchOptions {
   domainsToOpenInCurrentTab?: string[];
   enableActivityLogging?: boolean;
   hideAutocomplete?: boolean;
+  initialFilters?: FilterValue[];
   key?: string;
   locale?: string;
   onAuthTokenRequired?: () => void;

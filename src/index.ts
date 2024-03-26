@@ -1,11 +1,20 @@
+import merge from 'lodash/merge';
 import { normalizeUrl } from '@docusaurus/utils';
 import type { LoadContext, Plugin } from '@docusaurus/types';
 import { Options, normalizePluginOptions } from './options';
+import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 export default function searchGlean(context: LoadContext, options: Options): Plugin<void> {
   const { baseUrl } = context;
+  const { siteConfig } = useDocusaurusContext();
 
-  options = normalizePluginOptions(options);
+  options = normalizePluginOptions(
+    merge(options, {
+      initialFilters: [
+        { key: 'repository', value: `${siteConfig.organizationName}/${siteConfig.projectName}` },
+      ],
+    }),
+  );
 
   return {
     name: 'docusaurus-plugin-search-glean',

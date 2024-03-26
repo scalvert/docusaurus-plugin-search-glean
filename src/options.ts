@@ -16,6 +16,7 @@ export const DEFAULT_PLUGIN_OPTIONS: PluginOptions = {
   sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
   searchOptions: {
     datasourcesFilter: ['github'],
+    initialFilters: [{ key: 'type', value: 'page' }],
   },
   chatOptions: {},
   chatPagePath: 'chat',
