@@ -1,17 +1,19 @@
 {
   "compilerOptions": {
-    /* Emit */
-    "target": "esnext",
+    "target": "ES2020",
     "lib": ["ESNext", "DOM"],
     "declaration": true,
     "declarationMap": false,
     "sourceMap": false,
-    "jsx": "react-native",
+    "jsx": "react-jsx",
     "importHelpers": true,
     "noEmitHelpers": true,
-    "module": "esnext",
+    "module": "NodeNext",
     "noEmit": false,
-
+    "incremental": true,
+    "tsBuildInfoFile": "./lib/.tsbuildinfo",
+    "rootDir": "src",
+    "outDir": "lib",
     "allowUnreachableCode": false,
     "exactOptionalPropertyTypes": false,
     "noFallthroughCasesInSwitch": true,
@@ -31,8 +33,7 @@
     "noUnusedLocals": false,
     "noUnusedParameters": false,
     "importsNotUsedAsValues": "remove",
-
-    "moduleResolution": "bundler",
+    "moduleResolution": "NodeNext",
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
@@ -40,12 +41,9 @@
     "isolatedModules": true,
     "allowJs": true,
     "skipLibCheck": true,
-    "incremental": true,
-    "tsBuildInfoFile": "./lib/.tsbuildinfo-client",
-    "rootDir": "src",
-    "outDir": "lib",
     "types": ["node", "@docusaurus/module-type-aliases"]
   },
-  "include": ["src/**/*", "src/**/*.d.ts"],
-  "exclude": ["tests/**"]
+  "include": ["src/**/*"],
+  "exclude": ["src/client", "src/theme", "**/tests/**"],
+  "references": [{ "path": "tsconfig.client.json" }]
 }
