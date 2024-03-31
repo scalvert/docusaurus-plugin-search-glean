@@ -2,11 +2,15 @@ import merge from 'lodash/merge';
 import { normalizeUrl } from '@docusaurus/utils';
 import type { LoadContext, Plugin } from '@docusaurus/types';
 import { Options, normalizePluginOptions } from './options';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 
 export default function searchGlean(context: LoadContext, options: Options): Plugin<void> {
-  const { baseUrl } = context;
-  const { siteConfig } = useDocusaurusContext();
+  const { baseUrl, siteConfig } = context;
+
+  if (!siteConfig.organizationName || !siteConfig.projectName) {
+    throw new Error(
+      'Missing organizationName or projectName in siteConfig. Please check your Docusaurus configuration.',
+    );
+  }
 
   options = normalizePluginOptions(
     merge(options, {
