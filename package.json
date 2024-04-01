@@ -74,7 +74,7 @@
   },
   "volta": {
     "node": "18.19.1",
-    "yarn": "1.22.22"
+    "yarn": "3.8.1"
   },
   "publishConfig": {
     "access": "public",
