@@ -1,31 +1,37 @@
-import { describe, it, expect } from 'vitest';
-import { normalizePluginOptions } from '@docusaurus/utils-validation';
-import { validateOptions, Options, PluginOptions } from '../src/options';
+import { describe, test, expect } from 'vitest';
+import { normalizePluginOptions as externalNormalizePluginOptions } from '@docusaurus/utils-validation';
+import {
+  validateOptions,
+  Options,
+  PluginOptions,
+  DEFAULT_PLUGIN_OPTIONS,
+  normalizePluginOptions,
+} from '../src/options';
 import { Validate } from '@docusaurus/types';
 
 function testValidateOptions(options: Options) {
   return validateOptions({
-    validate: normalizePluginOptions as Validate<Options, PluginOptions>,
+    validate: externalNormalizePluginOptions as Validate<Options, PluginOptions>,
     options,
   });
 }
 
 describe('PluginOptions validation', () => {
-  it('throws for null options', () => {
+  test('throws for null options', () => {
     // @ts-expect-error: TS should error
     expect(() => testValidateOptions(null)).toThrowErrorMatchingInlineSnapshot(
       `[ValidationError: "value" must be of type object]`,
     );
   });
 
-  it('validates sdkUrl format', () => {
+  test('validates sdkUrl format', () => {
     const options = { sdkUrl: 'not-a-valid-url' };
     expect(() => testValidateOptions(options)).toThrowErrorMatchingInlineSnapshot(
       `[ValidationError: "sdkUrl" must be a valid uri]`,
     );
   });
 
-  it('validates partial searchOptions without throwing', () => {
+  test('validates partial searchOptions without throwing', () => {
     const options = {
       sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
       searchOptions: { key: 'test' },
@@ -36,7 +42,7 @@ describe('PluginOptions validation', () => {
     });
   });
 
-  it('validates searchOptions can be false without throwing', () => {
+  test('validates searchOptions can be false without throwing', () => {
     const options = {
       sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
       searchOptions: false,
@@ -47,7 +53,7 @@ describe('PluginOptions validation', () => {
     });
   });
 
-  it('validates partial chatOptions without throwing', () => {
+  test('validates partial chatOptions without throwing', () => {
     const options = {
       sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
       chatOptions: { agent: 'agent_id' },
@@ -58,7 +64,7 @@ describe('PluginOptions validation', () => {
     });
   });
 
-  it('validates chatOptions can be false without throwing', () => {
+  test('validates chatOptions can be false without throwing', () => {
     const options = {
       sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
       chatOptions: false,
@@ -69,7 +75,7 @@ describe('PluginOptions validation', () => {
     });
   });
 
-  it('allows all valid options without throwing', () => {
+  test('allows all valid options without throwing', () => {
     const options = {
       sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
       searchOptions: {
@@ -82,5 +88,42 @@ describe('PluginOptions validation', () => {
       },
     };
     expect(() => testValidateOptions(options)).not.toThrow();
+  });
+});
+
+describe('PluginOptions normalization', () => {
+  test('normalizePluginOptions - no options provided', () => {
+    const result = normalizePluginOptions({});
+    expect(result).toEqual(DEFAULT_PLUGIN_OPTIONS);
+  });
+
+  test('normalizePluginOptions - partial options provided', () => {
+    const options = { sdkUrl: 'https://app.glean.com/embedded-search-v2.min.js' };
+    const result = normalizePluginOptions(options);
+    expect(result).toEqual({ ...DEFAULT_PLUGIN_OPTIONS, ...options });
+  });
+
+  test('normalizePluginOptions - all options provided', () => {
+    const options = {
+      sdkUrl: 'https://app.glean.com/embedded-search-v2.min.js',
+      searchOptions: {
+        datasourcesFilter: ['github', 'stackoverflow'],
+        initialFilters: [{ key: 'type', value: 'issue' }],
+      },
+      chatOptions: { chatId: 'chat_id' },
+      chatPagePath: 'chat-v2',
+    };
+    const result = normalizePluginOptions(options);
+    expect(result).toEqual(options);
+  });
+
+  test('normalizePluginOptions - extra options provided', () => {
+    const options = {
+      ...DEFAULT_PLUGIN_OPTIONS,
+      sdkUrl: 'https://app.glean.com/embedded-search-v2.min.js',
+      extraOption: 'extraValue',
+    };
+    const result = normalizePluginOptions(options);
+    expect(result).toEqual(options);
   });
 });

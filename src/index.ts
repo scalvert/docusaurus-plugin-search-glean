@@ -13,11 +13,19 @@ export default function searchGlean(context: LoadContext, options: Options): Plu
   }
 
   options = normalizePluginOptions(
-    merge(options, {
-      initialFilters: [
-        { key: 'repository', value: `${siteConfig.organizationName}/${siteConfig.projectName}` },
-      ],
-    }),
+    merge(
+      {
+        searchOptions: {
+          initialFilters: [
+            {
+              key: 'repository',
+              value: `${siteConfig.organizationName}/${siteConfig.projectName}`,
+            },
+          ],
+        },
+      },
+      options,
+    ),
   );
 
   return {
