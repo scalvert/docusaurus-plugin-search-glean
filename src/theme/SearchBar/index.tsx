@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { usePluginData } from '@docusaurus/useGlobalData';
 
 import { SearchButton } from '../SearchButton';
@@ -9,10 +9,10 @@ export default function SearchBarWrapper() {
   const containerRef = useRef<HTMLSpanElement>(null);
   const { options } = usePluginData('docusaurus-plugin-search-glean') as { options: PluginOptions };
 
-  if (!options.searchOptions) return null;
-
   useEffect(() => {
-    if (!window.EmbeddedSearch) return;
+    if (!window.EmbeddedSearch) {
+      return;
+    }
 
     window.EmbeddedSearch.attach(
       containerRef.current!,

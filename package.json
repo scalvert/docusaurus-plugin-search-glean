@@ -42,7 +42,7 @@
     "watch": "run-p -c copy:watch build:watch"
   },
   "dependencies": {
-    "lodash.merge": "^4.6.2"
+    "lodash.mergewith": "^4.6.2"
   },
   "devDependencies": {
     "@docusaurus/core": "^3.0.0",

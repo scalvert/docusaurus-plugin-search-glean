@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import type { OptionValidationContext } from '@docusaurus/types';
 import { ChatOptions, ModalSearchOptions } from './types';
-import merge from 'lodash/merge';
+import mergeWith from 'lodash/mergewith';
 
 export type PluginOptions = {
   sdkUrl: string;
@@ -22,8 +22,12 @@ export const DEFAULT_PLUGIN_OPTIONS: PluginOptions = {
   chatPagePath: 'chat',
 };
 
+export function arrayMerger(objValue: any[], srcValue: any[]): any[] | undefined {
+  return Array.isArray(objValue) ? objValue.concat(srcValue) : undefined;
+}
+
 export function normalizePluginOptions(options: Options): PluginOptions {
-  return merge({}, DEFAULT_PLUGIN_OPTIONS, options);
+  return mergeWith({}, DEFAULT_PLUGIN_OPTIONS, options, arrayMerger);
 }
 
 const AuthTokenDetailsSchema = Joi.object({
@@ -66,6 +70,7 @@ const commonOptionsSchema = Joi.object({
 const ModalSearchOptionsSchema = commonOptionsSchema.keys({
   datasource: Joi.string().optional(),
   datasourcesFilter: Joi.array().items(Joi.string()).optional(),
+  initialFilters: Joi.array().items(Joi.object()).optional(),
   hideAutocomplete: Joi.boolean().optional(),
   onChat: Joi.function().optional(),
   onDetach: Joi.function().optional(),

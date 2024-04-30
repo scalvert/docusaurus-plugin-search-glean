@@ -1,7 +1,7 @@
-import merge from 'lodash/merge';
+import mergeWith from 'lodash/mergewith';
 import { normalizeUrl } from '@docusaurus/utils';
 import type { LoadContext, Plugin } from '@docusaurus/types';
-import { Options, normalizePluginOptions } from './options';
+import { Options, arrayMerger } from './options';
 
 export default function searchGlean(context: LoadContext, options: Options): Plugin<void> {
   const { baseUrl, siteConfig } = context;
@@ -12,20 +12,19 @@ export default function searchGlean(context: LoadContext, options: Options): Plu
     );
   }
 
-  options = normalizePluginOptions(
-    merge(
-      {
-        searchOptions: {
-          initialFilters: [
-            {
-              key: 'repository',
-              value: `${siteConfig.organizationName}/${siteConfig.projectName}`,
-            },
-          ],
-        },
+  options = mergeWith(
+    {
+      searchOptions: {
+        initialFilters: [
+          {
+            key: 'repository',
+            value: `${siteConfig.organizationName}/${siteConfig.projectName}`,
+          },
+        ],
       },
-      options,
-    ),
+    },
+    options,
+    arrayMerger,
   );
 
   return {
@@ -42,7 +41,9 @@ export default function searchGlean(context: LoadContext, options: Options): Plu
     contentLoaded({ actions: { addRoute, setGlobalData } }) {
       setGlobalData({ options });
 
-      if (!options.chatOptions) return;
+      if (!options.chatOptions) {
+        return;
+      }
 
       if (options.chatPagePath) {
         addRoute({

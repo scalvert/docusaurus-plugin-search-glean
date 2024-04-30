@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import Head from '@docusaurus/Head';
 import { usePluginData } from '@docusaurus/useGlobalData';
 import Layout from '@theme/Layout';
@@ -11,7 +11,9 @@ export default function ChatPage(): JSX.Element {
   const { options } = usePluginData('docusaurus-plugin-search-glean') as { options: PluginOptions };
 
   useEffect(() => {
-    if (!window.EmbeddedSearch) return;
+    if (!window.EmbeddedSearch) {
+      return;
+    }
 
     window.EmbeddedSearch.renderChat(containerRef.current!, options.chatOptions || {});
   }, [containerRef.current]);
