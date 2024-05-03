@@ -1,13 +1,12 @@
 import { useEffect, useRef } from 'react';
-import { usePluginData } from '@docusaurus/useGlobalData';
 
 import { SearchButton } from '../SearchButton';
-import { PluginOptions } from '../../options';
 import { ModalSearchOptions } from '../../types';
+import { useGleanConfig } from '../../utils';
 
 export default function SearchBarWrapper() {
   const containerRef = useRef<HTMLSpanElement>(null);
-  const { options } = usePluginData('docusaurus-plugin-search-glean') as { options: PluginOptions };
+  const { options } = useGleanConfig();
 
   useEffect(() => {
     if (!window.EmbeddedSearch) {

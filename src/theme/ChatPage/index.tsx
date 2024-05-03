@@ -1,14 +1,12 @@
 import { useEffect, useRef } from 'react';
 import Head from '@docusaurus/Head';
-import { usePluginData } from '@docusaurus/useGlobalData';
 import Layout from '@theme/Layout';
 
-import { useTitleFormatter } from '../../utils';
-import { PluginOptions } from '../../options';
+import { useGleanConfig, useTitleFormatter } from '../../utils';
 
 export default function ChatPage(): JSX.Element {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { options } = usePluginData('docusaurus-plugin-search-glean') as { options: PluginOptions };
+  const { options } = useGleanConfig();
 
   useEffect(() => {
     if (!window.EmbeddedSearch) {

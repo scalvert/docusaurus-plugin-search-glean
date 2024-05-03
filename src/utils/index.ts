@@ -9,6 +9,8 @@
 // Context: https://github.com/typesense/docusaurus-theme-search-typesense/issues/27#issuecomment-1415757477
 
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
+import { usePluginData } from '@docusaurus/useGlobalData';
+import { PluginOptions } from '../options';
 
 /**
  * Formats the page's title based on relevant site config and other contexts.
@@ -17,4 +19,10 @@ export function useTitleFormatter(title?: string | undefined): string {
   const { siteConfig } = useDocusaurusContext();
   const { title: siteTitle, titleDelimiter } = siteConfig;
   return title?.trim().length ? `${title.trim()} ${titleDelimiter} ${siteTitle}` : siteTitle;
+}
+
+export function useGleanConfig(): { options: PluginOptions } {
+  const { options } = usePluginData('docusaurus-plugin-search-glean') as { options: PluginOptions };
+
+  return { options };
 }

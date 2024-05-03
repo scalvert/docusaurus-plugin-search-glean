@@ -1,4 +1,3 @@
-import mergeWith from 'lodash/mergewith';
 import { normalizeUrl } from '@docusaurus/utils';
 import type { LoadContext, Plugin } from '@docusaurus/types';
 import { Options, normalizePluginOptions } from './options';
