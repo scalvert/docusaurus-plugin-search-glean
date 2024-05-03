@@ -26,8 +26,8 @@ export function arrayMerger(objValue: any[], srcValue: any[]): any[] | undefined
   return Array.isArray(objValue) ? objValue.concat(srcValue) : undefined;
 }
 
-export function normalizePluginOptions(options: Options): PluginOptions {
-  return mergeWith({}, DEFAULT_PLUGIN_OPTIONS, options, arrayMerger);
+export function normalizePluginOptions(...options: Partial<Options>[]): PluginOptions {
+  return mergeWith({}, DEFAULT_PLUGIN_OPTIONS, ...options, arrayMerger);
 }
 
 const AuthTokenDetailsSchema = Joi.object({

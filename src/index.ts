@@ -1,7 +1,7 @@
 import mergeWith from 'lodash/mergewith';
 import { normalizeUrl } from '@docusaurus/utils';
 import type { LoadContext, Plugin } from '@docusaurus/types';
-import { Options, arrayMerger } from './options';
+import { Options, normalizePluginOptions } from './options';
 
 export default function searchGlean(context: LoadContext, options: Options): Plugin<void> {
   const { baseUrl, siteConfig } = context;
@@ -12,7 +12,7 @@ export default function searchGlean(context: LoadContext, options: Options): Plu
     );
   }
 
-  options = mergeWith(
+  options = normalizePluginOptions(
     {
       searchOptions: {
         initialFilters: [
@@ -24,7 +24,6 @@ export default function searchGlean(context: LoadContext, options: Options): Plu
       },
     },
     options,
-    arrayMerger,
   );
 
   return {
