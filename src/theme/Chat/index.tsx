@@ -18,13 +18,13 @@ export default function ChatPage(): JSX.Element {
     }
   };
 
-  useEffect(() => {
-    initializeChat();
-  }, []);
-
-  useThemeChange((colorMode) => {
-    initializeChat(colorMode);
+  const initialTheme = useThemeChange((theme) => {
+    initializeChat(theme);
   });
+
+  useEffect(() => {
+    initializeChat(initialTheme);
+  }, []);
 
   return (
     <div

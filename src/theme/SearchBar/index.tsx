@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 
 import { SearchButton } from '../SearchButton';
-import { PluginOptions } from '../../options';
 import { ModalSearchOptions, ThemeVariant } from '../../types';
+import { useGleanConfig } from '../../utils';
 import useThemeChange from '../../hooks/useThemeChange';
 
 export default function SearchBarWrapper() {
@@ -18,13 +18,13 @@ export default function SearchBarWrapper() {
     }
   };
 
-  useEffect(() => {
-    initializeSearch();
-  }, []);
-
-  useThemeChange((colorMode) => {
-    initializeSearch(colorMode);
+  const initialTheme = useThemeChange((theme) => {
+    initializeSearch(theme);
   });
+
+  useEffect(() => {
+    initializeSearch(initialTheme);
+  }, []);
 
   return (
     <span ref={containerRef}>
