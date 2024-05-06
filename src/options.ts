@@ -1,7 +1,7 @@
 import Joi from 'joi';
 import type { OptionValidationContext } from '@docusaurus/types';
 import { ChatOptions, ModalSearchOptions } from './types';
-import mergeWith from 'lodash/mergewith';
+import mergeWith from 'lodash/mergeWith';
 
 export type PluginOptions = {
   sdkUrl: string;
