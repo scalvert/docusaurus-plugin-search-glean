@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 
 import { SearchButton } from '../SearchButton';
-import { ModalSearchOptions, ThemeVariant } from '../../types';
+import { ModalSearchOptions, ThemeVariant } from '@gleanwork/web-sdk';
 import { useGleanConfig } from '../../utils';
 import useThemeChange from '../../hooks/useThemeChange';
 
