@@ -2244,6 +2244,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@gleanwork/web-sdk@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "@gleanwork/web-sdk@npm:1.0.1"
+  checksum: 59124657d733dced8d4a1d763e066d45a2798cb2619de6413269803840672aa67be9cd8191d9ac93857f4aa1e68c1d956b9a4adf216786c62753d4e2a617ca7f
+  languageName: node
+  linkType: hard
+
 "@hapi/hoek@npm:^9.0.0, @hapi/hoek@npm:^9.3.0":
   version: 9.3.0
   resolution: "@hapi/hoek@npm:9.3.0"
@@ -5700,6 +5707,7 @@ __metadata:
     "@docusaurus/types": ^3.0.0
     "@docusaurus/utils": ^3.0.0
     "@docusaurus/utils-validation": ^3.0.0
+    "@gleanwork/web-sdk": ^1.0.1
     "@release-it-plugins/lerna-changelog": ^5.0.0
     "@types/lodash": ^4.14.202
     "@types/node": ^20.11.30

@@ -2,7 +2,7 @@ import { useEffect, useRef } from 'react';
 import { usePluginData } from '@docusaurus/useGlobalData';
 
 import { PluginOptions } from '../../options';
-import { ThemeVariant } from '../../types';
+import { ThemeVariant } from '@gleanwork/web-sdk';
 import useThemeChange from '../../hooks/useThemeChange';
 
 export default function ChatPage(): JSX.Element {

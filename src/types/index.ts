@@ -1,13 +1,4 @@
-export type {
-  ThemeVariant,
-  ThemeVariantOrAuto,
-  ChatCustomizations,
-  ModalSearchOptions,
-  ChatOptions,
-  ThemeConfig,
-} from './glean';
-
-import type { ModalSearchOptions, ChatOptions } from './glean';
+import { ModalSearchOptions, ChatOptions } from '@gleanwork/web-sdk';
 
 declare global {
   interface Window {
@@ -17,3 +8,5 @@ declare global {
     };
   }
 }
+
+export type { ThemeConfig } from './glean';
