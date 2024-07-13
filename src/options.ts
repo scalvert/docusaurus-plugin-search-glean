@@ -19,7 +19,7 @@ export const DEFAULT_PLUGIN_OPTIONS: PluginOptions = {
   chatPagePath: 'chat',
 };
 
-export function arrayMerger(objValue: any[], srcValue: any[]): any[] | undefined {
+export function arrayMerger(objValue: unknown[], srcValue: unknown[]): unknown[] | undefined {
   return Array.isArray(objValue) ? objValue.concat(srcValue) : undefined;
 }
 

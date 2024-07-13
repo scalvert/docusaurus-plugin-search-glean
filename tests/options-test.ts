@@ -45,7 +45,7 @@ describe('PluginOptions validation', () => {
   test('validates searchOptions can be false without throwing', () => {
     const options = {
       sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
-      searchOptions: false as false,
+      searchOptions: false as const,
     };
     expect(testValidateOptions(options)).toMatchObject({
       sdkUrl: expect.any(String),
@@ -67,7 +67,7 @@ describe('PluginOptions validation', () => {
   test('validates chatOptions can be false without throwing', () => {
     const options = {
       sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
-      chatOptions: false as false,
+      chatOptions: false as const,
     };
     expect(testValidateOptions(options)).toMatchObject({
       sdkUrl: expect.any(String),

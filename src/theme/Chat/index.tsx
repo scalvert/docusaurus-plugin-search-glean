@@ -24,7 +24,7 @@ export default function ChatPage(): JSX.Element {
 
   useEffect(() => {
     initializeChat(initialTheme);
-  }, []);
+  });
 
   return (
     <div

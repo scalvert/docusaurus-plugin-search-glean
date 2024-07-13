@@ -24,7 +24,7 @@ export default function SearchBarWrapper() {
 
   useEffect(() => {
     initializeSearch(initialTheme);
-  }, []);
+  });
 
   return (
     <span ref={containerRef}>
