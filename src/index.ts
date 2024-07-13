@@ -3,27 +3,9 @@ import type { LoadContext, Plugin } from '@docusaurus/types';
 import { Options, normalizePluginOptions } from './options';
 
 export default function searchGlean(context: LoadContext, options: Options): Plugin<void> {
-  const { baseUrl, siteConfig } = context;
+  const { baseUrl } = context;
 
-  if (!siteConfig.organizationName || !siteConfig.projectName) {
-    throw new Error(
-      'Missing organizationName or projectName in siteConfig. Please check your Docusaurus configuration.',
-    );
-  }
-
-  options = normalizePluginOptions(
-    {
-      searchOptions: {
-        initialFilters: [
-          {
-            key: 'repository',
-            value: `${siteConfig.organizationName}/${siteConfig.projectName}`,
-          },
-        ],
-      },
-    },
-    options,
-  );
+  options = normalizePluginOptions({}, options);
 
   return {
     name: 'docusaurus-plugin-search-glean',

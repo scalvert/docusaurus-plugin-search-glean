@@ -45,7 +45,7 @@ describe('PluginOptions validation', () => {
   test('validates searchOptions can be false without throwing', () => {
     const options = {
       sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
-      searchOptions: false,
+      searchOptions: false as false,
     };
     expect(testValidateOptions(options)).toMatchObject({
       sdkUrl: expect.any(String),
@@ -67,7 +67,7 @@ describe('PluginOptions validation', () => {
   test('validates chatOptions can be false without throwing', () => {
     const options = {
       sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
-      chatOptions: false,
+      chatOptions: false as false,
     };
     expect(testValidateOptions(options)).toMatchObject({
       sdkUrl: expect.any(String),
@@ -84,7 +84,7 @@ describe('PluginOptions validation', () => {
       },
       chatOptions: {
         agent: 'agent_id',
-        onChat: (chatId?: number) => console.log(`Chat initiated with ID: ${chatId}`),
+        onChat: (chatId?: string) => console.log(`Chat initiated with ID: ${chatId}`),
       },
     };
     expect(() => testValidateOptions(options)).not.toThrow();
@@ -107,8 +107,10 @@ describe('PluginOptions normalization', () => {
     const options = {
       sdkUrl: 'https://app.glean.com/embedded-search-v2.min.js',
       searchOptions: {
-        datasourcesFilter: ['github', 'stackoverflow'],
-        initialFilters: [{ key: 'type', value: 'issue' }],
+        initialFilters: [
+          { key: 'app', value: 'github' },
+          { key: 'type', value: 'issue' },
+        ],
       },
       chatOptions: { chatId: 'chat_id' },
       chatPagePath: 'chat-v2',
