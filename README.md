@@ -155,29 +155,6 @@ module.exports = {
 };
 ```
 
-### Example
-
-```js
-module.exports = {
-  // ...
-  plugins: [
-    [
-      require.resolve("docusaurus-plugin-search-glean"),
-      {
-        sdkUrl: "https://app.glean.com/embedded-search-latest.min.js",
-        searchOptions: {
-          datasourcesFilter: ["github"],
-        },
-        chatOptions: {
-          applicationId: "your-glean-app-id",
-        },
-        chatPagePath: "chat",
-      },
-    ],
-  ],
-};
-```
-
 ### Options
 
 | Property        | Type                                   | Description                                                |
