@@ -1,3 +1,13 @@
+
+## v0.3.0 (2024-07-15)
+
+#### :rocket: Enhancement
+* [#2](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/2) Convert to @gleanwork/web-sdk for types ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v0.2.1 (2024-05-06)
 
 
