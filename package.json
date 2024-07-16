@@ -38,7 +38,7 @@
     "copy:watch": "node ./scripts/copyUntypedFiles.js --watch",
     "format": "prettier --write ./src",
     "lint": "eslint --cache --report-unused-disable-directives ./src",
-    "release": "yarn build && release-it",
+    "release": "rm -rf lib && yarn build && release-it",
     "test": "vitest run",
     "watch": "run-p -c copy:watch build:watch"
   },
