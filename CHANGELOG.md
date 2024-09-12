@@ -1,4 +1,14 @@
 
+
+## v0.3.2 (2024-09-12)
+
+#### :house: Internal
+* [#3](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/3) Renames SDK global to GleanWebSDK to match new naming convention ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v0.3.1 (2024-07-16)
 
 
