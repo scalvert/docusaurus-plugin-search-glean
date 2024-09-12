@@ -10,8 +10,8 @@ export default function SearchBarWrapper() {
   const { options } = useGleanConfig();
 
   const initializeSearch = (themeVariant: ThemeVariant = 'light') => {
-    if (window.EmbeddedSearch && containerRef.current) {
-      window.EmbeddedSearch.attach(containerRef.current, {
+    if (window.GleanWebSDK && containerRef.current) {
+      window.GleanWebSDK.attach(containerRef.current, {
         ...(options.searchOptions as Required<ModalSearchOptions>),
         themeVariant,
       });
