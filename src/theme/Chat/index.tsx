@@ -10,8 +10,8 @@ export default function ChatPage(): JSX.Element {
   const { options } = usePluginData('docusaurus-plugin-search-glean') as { options: PluginOptions };
 
   const initializeChat = (themeVariant: ThemeVariant = 'light') => {
-    if (window.EmbeddedSearch && containerRef.current) {
-      window.EmbeddedSearch.renderChat(containerRef.current, {
+    if (window.GleanWebSDK && containerRef.current) {
+      window.GleanWebSDK.renderChat(containerRef.current, {
         ...(options.chatOptions || {}),
         themeVariant,
       });
