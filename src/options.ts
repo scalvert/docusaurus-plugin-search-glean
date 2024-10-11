@@ -67,7 +67,7 @@ const commonOptionsSchema = Joi.object({
 const ModalSearchOptionsSchema = commonOptionsSchema.keys({
   datasource: Joi.string().optional(),
   datasourcesFilter: Joi.array().items(Joi.string()).optional(),
-  initialFilters: Joi.array().items(Joi.object()).optional(),
+  filters: Joi.array().items(Joi.object()).optional(),
   hideAutocomplete: Joi.boolean().optional(),
   onChat: Joi.function().optional(),
   onDetach: Joi.function().optional(),

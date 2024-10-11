@@ -40,7 +40,7 @@ This plugin can be configured to use both Glean's search or chat features, or bo
 
 1. **If your documentation doesn't change often**:
 
-    Use statically configured `search` and `chat` configurations as options to the plugin. These options can be set in the `docusaurus.config.js` file. For `search`, you can set the `initialFilters` option to filter the search results. For `chat`, you can set the `applicationId` option to identify the chat application.
+    Use statically configured `search` and `chat` configurations as options to the plugin. These options can be set in the `docusaurus.config.js` file. For `search`, you can set the `filters` option to filter the search results. For `chat`, you can set the `applicationId` option to identify the chat application.
 
     Any changes to the docusaurus site will be automatically picked up by Glean and the `search` content will be updated accordingly. For `chat`, changes to the site will ***not*** automatically update the knowledge sources for the Glean App - those changes must be made manually in Glean.
 
@@ -54,7 +54,7 @@ This plugin can be configured to use both Glean's search or chat features, or bo
           require.resolve("docusaurus-plugin-search-glean"),
           {
             searchOptions: {
-              initialFilters: [
+              filters: [
                 { key: "app", value: "github" },
                 { key: "type", value: "page" },
                 { key: "repository", value: "<your repository name>" }
@@ -91,7 +91,7 @@ This plugin can be configured to use both Glean's search or chat features, or bo
           require.resolve("docusaurus-plugin-search-glean"),
           {
             searchOptions: {
-              initialFilters: [
+              filters: [
                 { key: "collection", value: "<collection name>" },
               ],
             },

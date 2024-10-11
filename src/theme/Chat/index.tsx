@@ -1,8 +1,8 @@
 import { useEffect, useRef } from 'react';
 import { usePluginData } from '@docusaurus/useGlobalData';
+import GleanWebSDK, { ThemeVariant } from '@gleanwork/web-sdk';
 
 import { PluginOptions } from '../../options';
-import { ThemeVariant } from '@gleanwork/web-sdk';
 import useThemeChange from '../../hooks/useThemeChange';
 
 export default function ChatPage(): JSX.Element {
@@ -10,8 +10,8 @@ export default function ChatPage(): JSX.Element {
   const { options } = usePluginData('docusaurus-plugin-search-glean') as { options: PluginOptions };
 
   const initializeChat = (themeVariant: ThemeVariant = 'light') => {
-    if (window.GleanWebSDK && containerRef.current) {
-      window.GleanWebSDK.renderChat(containerRef.current, {
+    if (containerRef.current) {
+      GleanWebSDK.renderChat(containerRef.current, {
         ...(options.chatOptions || {}),
         themeVariant,
       });

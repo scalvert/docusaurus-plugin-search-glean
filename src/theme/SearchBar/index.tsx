@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
+import GleanWebSDK, { ModalSearchOptions, ThemeVariant } from '@gleanwork/web-sdk';
 
 import { SearchButton } from '../SearchButton';
-import { ModalSearchOptions, ThemeVariant } from '@gleanwork/web-sdk';
 import { useGleanConfig } from '../../utils';
 import useThemeChange from '../../hooks/useThemeChange';
 
@@ -10,8 +10,8 @@ export default function SearchBarWrapper() {
   const { options } = useGleanConfig();
 
   const initializeSearch = (themeVariant: ThemeVariant = 'light') => {
-    if (window.GleanWebSDK && containerRef.current) {
-      window.GleanWebSDK.attach(containerRef.current, {
+    if (containerRef.current) {
+      GleanWebSDK.attach(containerRef.current, {
         ...(options.searchOptions as Required<ModalSearchOptions>),
         themeVariant,
       });
