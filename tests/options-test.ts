@@ -107,7 +107,7 @@ describe('PluginOptions normalization', () => {
     const options = {
       sdkUrl: 'https://app.glean.com/embedded-search-v2.min.js',
       searchOptions: {
-        initialFilters: [
+        filters: [
           { key: 'app', value: 'github' },
           { key: 'type', value: 'issue' },
         ],

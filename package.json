@@ -43,7 +43,7 @@
     "watch": "run-p -c copy:watch build:watch"
   },
   "dependencies": {
-    "@gleanwork/web-sdk": "^1.0.1",
+    "@gleanwork/web-sdk": "^2.0.0",
     "lodash.mergewith": "^4.6.2"
   },
   "devDependencies": {
