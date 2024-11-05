@@ -33,20 +33,6 @@ export default function searchGlean(context: LoadContext, options: Options): Plu
         });
       }
     },
-
-    injectHtmlTags() {
-      return {
-        headTags: [
-          {
-            tagName: 'script',
-            attributes: {
-              async: true,
-              src: options.sdkUrl,
-            },
-          },
-        ],
-      };
-    },
   };
 }
 

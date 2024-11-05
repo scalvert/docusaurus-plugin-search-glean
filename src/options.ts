@@ -4,7 +4,6 @@ import { ChatOptions, ModalSearchOptions } from '@gleanwork/web-sdk';
 import mergeWith from 'lodash/mergeWith';
 
 export type PluginOptions = {
-  sdkUrl: string;
   searchOptions: Partial<ModalSearchOptions> | false;
   chatOptions: Partial<ChatOptions> | false;
   chatPagePath: string;
@@ -13,7 +12,6 @@ export type PluginOptions = {
 export type Options = Partial<PluginOptions>;
 
 export const DEFAULT_PLUGIN_OPTIONS: PluginOptions = {
-  sdkUrl: 'https://app.glean.com/embedded-search-latest.min.js',
   searchOptions: {},
   chatOptions: {},
   chatPagePath: 'chat',
@@ -77,7 +75,7 @@ const ModalSearchOptionsSchema = commonOptionsSchema.keys({
 });
 
 const ChatOptionsSchema = commonOptionsSchema.keys({
-  agent: Joi.string().optional(),
+  agent: Joi.string().valid('DEFAULT', 'GPT').optional(),
   applicationId: Joi.string().optional(),
   chatId: Joi.string().optional(),
   customizations: ChatCustomizationsSchema.optional(),
@@ -88,7 +86,6 @@ const ChatOptionsSchema = commonOptionsSchema.keys({
 });
 
 const PluginOptionsSchema = Joi.object({
-  sdkUrl: Joi.string().uri().default(DEFAULT_PLUGIN_OPTIONS.sdkUrl),
   searchOptions: Joi.alternatives()
     .try(ModalSearchOptionsSchema, Joi.boolean().valid(false))
     .default(DEFAULT_PLUGIN_OPTIONS.searchOptions),
