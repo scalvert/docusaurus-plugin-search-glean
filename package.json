@@ -43,7 +43,7 @@
     "watch": "run-p -c copy:watch build:watch"
   },
   "dependencies": {
-    "@gleanwork/web-sdk": "^2.0.0",
+    "@gleanwork/web-sdk": "^2.1.0",
     "lodash.mergewith": "^4.6.2"
   },
   "devDependencies": {
@@ -85,7 +85,7 @@
     "node": ">=18"
   },
   "volta": {
-    "node": "18.19.1",
+    "node": "22.11.0",
     "yarn": "3.8.1"
   },
   "publishConfig": {

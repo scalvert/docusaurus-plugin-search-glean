@@ -159,7 +159,6 @@ module.exports = {
 
 | Property        | Type                                   | Description                                                |
 | --------------- | -------------------------------------- | ---------------------------------------------------------- |
-| `sdkUrl`        | `string`                               | URL to the SDK required for the plugin.                    |
 | `searchOptions` | `Partial<ModalSearchOptions> \| false` | Options for search functionality. Pass `false` to disable. |
 | `chatOptions`   | `Partial<ChatOptions> \| false`        | Options for chat functionality. Pass `false` to disable.   |
 | `chatPagePath`  | `string`                               | Path to the chat page within the application.              |
