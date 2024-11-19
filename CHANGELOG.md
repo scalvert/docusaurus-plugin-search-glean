@@ -1,5 +1,19 @@
 
 
+
+## v0.4.1 (2024-11-19)
+
+#### :rocket: Enhancement
+* [#4](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/4) Converting to use persistent filters vs. temporary ones ([@scalvert](https://github.com/scalvert))
+
+#### :house: Internal
+* [#6](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/6) Upgrades release-it ([@scalvert](https://github.com/scalvert))
+* [#5](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/5) Updates to use node package variant of GleanWebSDK ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v0.3.2 (2024-09-12)
 
 #### :house: Internal
