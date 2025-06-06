@@ -1,11 +1,11 @@
-import { useEffect, useRef } from 'react';
+import { type ReactNode, useEffect, useRef } from 'react';
 import { usePluginData } from '@docusaurus/useGlobalData';
-import GleanWebSDK, { ThemeVariant } from '@gleanwork/web-sdk';
+import GleanWebSDK, { type ThemeVariant } from '@gleanwork/web-sdk';
 
 import { PluginOptions } from '../../options';
 import useThemeChange from '../../hooks/useThemeChange';
 
-export default function ChatPage(): JSX.Element {
+export default function ChatPage(): ReactNode {
   const containerRef = useRef<HTMLDivElement>(null);
   const { options } = usePluginData('docusaurus-plugin-search-glean') as { options: PluginOptions };
 
