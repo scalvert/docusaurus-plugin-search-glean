@@ -11,12 +11,16 @@ export default function SearchBarWrapper() {
 
   const initializeSearch = (themeVariant: ThemeVariant = 'light') => {
     if (containerRef.current) {
-      import('@gleanwork/web-sdk').then(({ attach }) => {
-        attach(containerRef.current!, {
-          ...(options.searchOptions as Required<ModalSearchOptions>),
-          themeVariant,
+      import('@gleanwork/web-sdk')
+        .then(({ attach }) => {
+          attach(containerRef.current!, {
+            ...(options.searchOptions as Required<ModalSearchOptions>),
+            themeVariant,
+          });
+        })
+        .catch((error) => {
+          console.error('Failed to load @gleanwork/web-sdk:', error);
         });
-      });
     }
   };
 
