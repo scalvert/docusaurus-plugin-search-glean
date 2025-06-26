@@ -1,4 +1,4 @@
-import { ModalSearchOptions, ChatOptions } from '@gleanwork/web-sdk';
+import type { ModalSearchOptions, ChatOptions } from '@gleanwork/web-sdk';
 
 export type ThemeConfig = {
   glean: {

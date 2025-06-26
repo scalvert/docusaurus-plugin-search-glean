@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { ThemeVariant } from '@gleanwork/web-sdk';
+import type { ThemeVariant } from '@gleanwork/web-sdk';
 
 interface ThemeChangeCallback {
   (theme: ThemeVariant): void;
