@@ -63,6 +63,7 @@ This plugin can be configured to use both Glean's search or chat features, or bo
             chatOptions: {
               applicationId: "your-glean-app-id",
             },
+            enableAnonymousAuth: true,
           },
         ],
       ],
@@ -162,5 +163,6 @@ module.exports = {
 | `searchOptions` | `Partial<ModalSearchOptions> \| false` | Options for search functionality. Pass `false` to disable. |
 | `chatOptions`   | `Partial<ChatOptions> \| false`        | Options for chat functionality. Pass `false` to disable.   |
 | `chatPagePath`  | `string`                               | Path to the chat page within the application.              |
+| `enableAnonymousAuth` | `boolean` | If true, the plugin will fetch guest authentication tokens automatically. |
 
 For more information on the search and chat options, refer to the [Glean documentation](https://developers.glean.com/docs/browser_api/).

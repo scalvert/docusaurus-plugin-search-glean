@@ -2,34 +2,40 @@ import { useEffect, useRef } from 'react';
 import type { ModalSearchOptions, ThemeVariant } from '@gleanwork/web-sdk';
 
 import { SearchButton } from '../SearchButton';
-import { useGleanConfig } from '../../utils';
+import { useGleanConfig, applyGuestAuth } from '../../utils';
 import useThemeChange from '../../hooks/useThemeChange';
 
 export default function SearchBarWrapper() {
   const containerRef = useRef<HTMLSpanElement>(null);
   const { options } = useGleanConfig();
 
-  const initializeSearch = (themeVariant: ThemeVariant = 'light') => {
-    if (containerRef.current) {
-      import('@gleanwork/web-sdk')
-        .then(({ attach }) => {
-          attach(containerRef.current!, {
-            ...(options.searchOptions as Required<ModalSearchOptions>),
-            themeVariant,
-          });
-        })
-        .catch((error) => {
-          console.error('Failed to load @gleanwork/web-sdk:', error);
-        });
+  const initializeSearch = async (themeVariant: ThemeVariant = 'light') => {
+    if (!containerRef.current) {
+      return;
+    }
+
+    try {
+      const { attach } = await import('@gleanwork/web-sdk');
+
+      let searchOptions: ModalSearchOptions = {
+        ...(options.searchOptions as Required<ModalSearchOptions>),
+        themeVariant,
+      };
+
+      searchOptions = await applyGuestAuth(options, searchOptions);
+
+      attach(containerRef.current, searchOptions);
+    } catch (error) {
+      console.error('Failed to load @gleanwork/web-sdk:', error);
     }
   };
 
   const initialTheme = useThemeChange((theme) => {
-    initializeSearch(theme);
+    void initializeSearch(theme);
   });
 
   useEffect(() => {
-    initializeSearch(initialTheme);
+    void initializeSearch(initialTheme);
   });
 
   return (

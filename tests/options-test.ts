@@ -60,6 +60,15 @@ describe('PluginOptions validation', () => {
     });
   });
 
+  test('validates enableAnonymousAuth without throwing', () => {
+    const options = {
+      enableAnonymousAuth: true,
+    };
+    expect(testValidateOptions(options)).toMatchObject({
+      enableAnonymousAuth: true,
+    });
+  });
+
   test('allows all valid options without throwing', () => {
     const options = {
       searchOptions: {
@@ -97,6 +106,7 @@ describe('PluginOptions normalization', () => {
       },
       chatOptions: { chatId: 'chat_id' },
       chatPagePath: 'chat-v2',
+      enableAnonymousAuth: true,
     };
     const result = normalizePluginOptions(options);
     expect(result).toEqual(options);

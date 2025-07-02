@@ -7,6 +7,7 @@ export type PluginOptions = {
   searchOptions: Partial<ModalSearchOptions> | false;
   chatOptions: Partial<ChatOptions> | false;
   chatPagePath: string;
+  enableAnonymousAuth: boolean;
 };
 
 export type Options = Partial<PluginOptions>;
@@ -15,6 +16,7 @@ export const DEFAULT_PLUGIN_OPTIONS: PluginOptions = {
   searchOptions: {},
   chatOptions: {},
   chatPagePath: 'chat',
+  enableAnonymousAuth: false,
 };
 
 export function arrayMerger(objValue: unknown[], srcValue: unknown[]): unknown[] | undefined {
@@ -93,6 +95,9 @@ const PluginOptionsSchema = Joi.object({
     .try(ChatOptionsSchema, Joi.boolean().valid(false))
     .default(DEFAULT_PLUGIN_OPTIONS.chatOptions),
   chatPagePath: Joi.string().default(DEFAULT_PLUGIN_OPTIONS.chatPagePath),
+  enableAnonymousAuth: Joi.boolean().default(
+    DEFAULT_PLUGIN_OPTIONS.enableAnonymousAuth,
+  ),
 });
 
 export function validateOptions({
