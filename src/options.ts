@@ -95,9 +95,7 @@ const PluginOptionsSchema = Joi.object({
     .try(ChatOptionsSchema, Joi.boolean().valid(false))
     .default(DEFAULT_PLUGIN_OPTIONS.chatOptions),
   chatPagePath: Joi.string().default(DEFAULT_PLUGIN_OPTIONS.chatPagePath),
-  enableAnonymousAuth: Joi.boolean().default(
-    DEFAULT_PLUGIN_OPTIONS.enableAnonymousAuth,
-  ),
+  enableAnonymousAuth: Joi.boolean().default(DEFAULT_PLUGIN_OPTIONS.enableAnonymousAuth),
 });
 
 export function validateOptions({

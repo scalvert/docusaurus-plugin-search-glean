@@ -1,5 +1,9 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { createGuestAuthProvider, type AuthTokenDetails, type GuestAuthProvider as SDKGuestAuthProvider } from '@gleanwork/web-sdk';
+import {
+  createGuestAuthProvider,
+  type AuthTokenDetails,
+  type GuestAuthProvider as SDKGuestAuthProvider,
+} from '@gleanwork/web-sdk';
 import type { PluginOptions } from '../options';
 
 const initialToken: AuthTokenDetails = {
@@ -85,11 +89,11 @@ export function GuestAuthProvider({ children, pluginOptions, backend }: GuestAut
 
 export function useGuestAuth(): GuestAuthContextValue {
   const context = useContext(GuestAuthContext);
-  
+
   if (!context) {
     throw new Error('useGuestAuth must be used within a GuestAuthProvider');
   }
-  
+
   return context;
 }
 
@@ -102,10 +106,12 @@ export async function applyGuestAuth<T extends { backend?: string }>(
   options: T,
   authToken?: AuthTokenDetails,
   onAuthTokenRequired?: () => Promise<AuthTokenDetails>,
-): Promise<T & {
-  authToken?: AuthTokenDetails;
-  onAuthTokenRequired?: () => Promise<AuthTokenDetails>;
-}> {
+): Promise<
+  T & {
+    authToken?: AuthTokenDetails;
+    onAuthTokenRequired?: () => Promise<AuthTokenDetails>;
+  }
+> {
   if (!pluginOptions.enableAnonymousAuth || !options.backend || !authToken) {
     return options;
   }
@@ -139,10 +145,12 @@ export function getGuestAuthProvider(
 export async function applyGuestAuthLegacy<T extends { backend?: string }>(
   pluginOptions: PluginOptions,
   options: T,
-): Promise<T & {
-  authToken?: AuthTokenDetails;
-  onAuthTokenRequired?: () => Promise<AuthTokenDetails>;
-}> {
+): Promise<
+  T & {
+    authToken?: AuthTokenDetails;
+    onAuthTokenRequired?: () => Promise<AuthTokenDetails>;
+  }
+> {
   const guestAuthProvider = getGuestAuthProvider(pluginOptions, options.backend);
 
   if (!guestAuthProvider) {

@@ -13,47 +13,53 @@ export default function ChatPage(): ReactNode {
   const abortControllerRef = useRef<AbortController | null>(null);
   const backend = (options.chatOptions as ChatOptions)?.backend;
 
-  const initializeChat = useCallback(async (themeVariant: ThemeVariant = 'light') => {
-    if (!containerRef.current) {
-      return;
-    }
-
-    abortControllerRef.current?.abort();
-    abortControllerRef.current = new AbortController();
-    const { signal } = abortControllerRef.current;
-
-    try {
-      let chatOptions = { ...(options.chatOptions || {}), themeVariant };
-
-      if (guestAuth && !guestAuth.isLoading && guestAuth.authToken.token) {
-        chatOptions = await applyGuestAuth(
-          options,
-          chatOptions,
-          guestAuth.authToken,
-          async () => {
-            await guestAuth.refreshToken();
-            return guestAuth.authToken;
-          },
-        );
+  const initializeChat = useCallback(
+    async (themeVariant: ThemeVariant = 'light') => {
+      if (!containerRef.current) {
+        return;
       }
 
-      if (signal.aborted || !containerRef.current) return;
+      abortControllerRef.current?.abort();
+      abortControllerRef.current = new AbortController();
+      const { signal } = abortControllerRef.current;
 
-      GleanWebSDK.renderChat(containerRef.current, chatOptions);
-    } catch (error) {
-      if (!signal.aborted) {
-        console.error('Failed to initialize chat:', error);
+      try {
+        let chatOptions = { ...(options.chatOptions || {}), themeVariant };
+
+        if (guestAuth && !guestAuth.isLoading && guestAuth.authToken.token) {
+          chatOptions = await applyGuestAuth(
+            options,
+            chatOptions,
+            guestAuth.authToken,
+            async () => {
+              await guestAuth.refreshToken();
+              return guestAuth.authToken;
+            },
+          );
+        }
+
+        if (signal.aborted || !containerRef.current) return;
+
+        GleanWebSDK.renderChat(containerRef.current, chatOptions);
+      } catch (error) {
+        if (!signal.aborted) {
+          console.error('Failed to initialize chat:', error);
+        }
       }
-    }
-  }, [options, guestAuth]);
+    },
+    [options, guestAuth],
+  );
 
-  const handleThemeChange = useCallback(async (theme: ThemeVariant) => {
-    try {
-      await initializeChat(theme);
-    } catch (error) {
-      console.error('Failed to initialize chat on theme change:', error);
-    }
-  }, [initializeChat]);
+  const handleThemeChange = useCallback(
+    async (theme: ThemeVariant) => {
+      try {
+        await initializeChat(theme);
+      } catch (error) {
+        console.error('Failed to initialize chat on theme change:', error);
+      }
+    },
+    [initializeChat],
+  );
 
   const initialTheme = useThemeChange(handleThemeChange);
 
