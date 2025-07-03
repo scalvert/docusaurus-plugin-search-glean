@@ -63,7 +63,6 @@ This plugin can be configured to use both Glean's search or chat features, or bo
             chatOptions: {
               applicationId: "your-glean-app-id",
             },
-            enableAnonymousAuth: true,
           },
         ],
       ],
@@ -84,6 +83,7 @@ This plugin can be configured to use both Glean's search or chat features, or bo
     Example:
 
     `docusaurus.config.js`:
+
     ```js
     module.exports = {
       // ...
