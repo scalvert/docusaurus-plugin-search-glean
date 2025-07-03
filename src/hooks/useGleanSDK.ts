@@ -1,4 +1,5 @@
 import { useCallback, useRef } from 'react';
+import useIsBrowser from '@docusaurus/useIsBrowser';
 import type { ThemeVariant, ModalSearchOptions, ChatOptions } from '@gleanwork/web-sdk';
 
 import { useGleanConfig, useGuestAuthOptional, applyGuestAuth } from '../utils';
@@ -9,6 +10,7 @@ export function useGleanSDK() {
   const { options } = useGleanConfig();
   const guestAuth = useGuestAuthOptional();
   const abortControllerRef = useRef<AbortController | null>(null);
+  const isBrowser = useIsBrowser();
 
   const initializeSDK = useCallback(
     async <T extends SDKOptions>(
@@ -19,6 +21,10 @@ export function useGleanSDK() {
         finalOptions: T & { themeVariant: ThemeVariant },
       ) => void,
     ) => {
+      if (!isBrowser) {
+        return;
+      }
+
       abortControllerRef.current?.abort();
       abortControllerRef.current = new AbortController();
       const { signal } = abortControllerRef.current;
@@ -52,7 +58,7 @@ export function useGleanSDK() {
         }
       }
     },
-    [options, guestAuth],
+    [options, guestAuth, isBrowser],
   );
 
   const cleanup = useCallback(() => {

@@ -42,7 +42,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['src/theme/Chat/index.tsx', 'src/theme/ChatPage/index.tsx', 'src/utils/index.ts'],
+      files: ['src/theme/Chat/index.tsx', 'src/theme/ChatPage/index.tsx', 'src/utils/index.ts', 'src/hooks/useGleanSDK.ts', 'src/utils/guestAuth.tsx'],
       rules: {
         'import/no-unresolved': [
           'error',
@@ -51,6 +51,7 @@ module.exports = {
               '@docusaurus/useGlobalData',
               '@theme/Layout',
               '@docusaurus/useDocusaurusContext',
+              '@docusaurus/useIsBrowser',
             ],
           },
         ],

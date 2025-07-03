@@ -13,6 +13,10 @@ vi.mock('@gleanwork/web-sdk', () => ({
   })),
 }));
 
+vi.mock('@docusaurus/useIsBrowser', () => ({
+  default: vi.fn(() => true),
+}));
+
 describe('Guest Authentication', () => {
   const mockOptions: PluginOptions = {
     searchOptions: {},

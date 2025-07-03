@@ -1,4 +1,5 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
+import useIsBrowser from '@docusaurus/useIsBrowser';
 import type {
   AuthTokenDetails,
   GuestAuthProvider as SDKGuestAuthProvider,
@@ -30,8 +31,9 @@ export function GuestAuthProvider({ children, pluginOptions, backend }: GuestAut
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<Error | null>(null);
   const [guestAuthProvider, setGuestAuthProvider] = useState<SDKGuestAuthProvider | null>(null);
+  const isBrowser = useIsBrowser();
 
-  const shouldUseGuestAuth = pluginOptions.enableAnonymousAuth && !!backend;
+  const shouldUseGuestAuth = pluginOptions.enableAnonymousAuth && !!backend && isBrowser;
 
   useEffect(() => {
     const initializeProvider = async () => {
