@@ -2,18 +2,13 @@ import { type ReactNode, useEffect, useRef, useCallback } from 'react';
 import type { ThemeVariant, ChatOptions } from '@gleanwork/web-sdk';
 
 import useThemeChange from '../../hooks/useThemeChange';
-import {
-  useGleanConfig,
-  useGuestAuthOptional,
-  applyGuestAuth,
-  GuestAuthProvider,
-} from '../../utils';
+import { useGleanConfig, GuestAuthProvider } from '../../utils';
+import { useGleanSDK } from '../../hooks/useGleanSDK';
 
 export default function ChatPage(): ReactNode {
   const containerRef = useRef<HTMLDivElement>(null);
   const { options } = useGleanConfig();
-  const guestAuth = useGuestAuthOptional();
-  const abortControllerRef = useRef<AbortController | null>(null);
+  const { initializeSDK, cleanup } = useGleanSDK();
   const backend = (options.chatOptions as ChatOptions)?.backend;
 
   const initializeChat = useCallback(
@@ -22,39 +17,13 @@ export default function ChatPage(): ReactNode {
         return;
       }
 
-      abortControllerRef.current?.abort();
-      abortControllerRef.current = new AbortController();
-      const { signal } = abortControllerRef.current;
-
-      try {
-        const { default: GleanWebSDK } = await import('@gleanwork/web-sdk');
-
-        if (signal.aborted) return;
-
-        let chatOptions = { ...(options.chatOptions || {}), themeVariant };
-
-        if (guestAuth && !guestAuth.isLoading && guestAuth.authToken.token) {
-          chatOptions = await applyGuestAuth(
-            options,
-            chatOptions,
-            guestAuth.authToken,
-            async () => {
-              await guestAuth.refreshToken();
-              return guestAuth.authToken;
-            },
-          );
+      await initializeSDK(themeVariant, options.chatOptions as ChatOptions, (sdk, finalOptions) => {
+        if (containerRef.current) {
+          sdk.default.renderChat(containerRef.current, finalOptions);
         }
-
-        if (signal.aborted || !containerRef.current) return;
-
-        GleanWebSDK.renderChat(containerRef.current, chatOptions);
-      } catch (error) {
-        if (!signal.aborted) {
-          console.error('Failed to initialize chat:', error);
-        }
-      }
+      });
     },
-    [options, guestAuth],
+    [initializeSDK, options.chatOptions],
   );
 
   const handleThemeChange = useCallback(
@@ -81,10 +50,8 @@ export default function ChatPage(): ReactNode {
 
     initializeOnMount();
 
-    return () => {
-      abortControllerRef.current?.abort();
-    };
-  }, [initializeChat, initialTheme]);
+    return cleanup;
+  }, [initializeChat, initialTheme, cleanup]);
 
   const chatElement = (
     <div

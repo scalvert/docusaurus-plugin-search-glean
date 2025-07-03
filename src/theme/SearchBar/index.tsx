@@ -2,19 +2,14 @@ import { useEffect, useRef, useCallback } from 'react';
 import type { ModalSearchOptions, ThemeVariant } from '@gleanwork/web-sdk';
 
 import { SearchButton } from '../SearchButton';
-import {
-  useGleanConfig,
-  useGuestAuthOptional,
-  applyGuestAuth,
-  GuestAuthProvider,
-} from '../../utils';
+import { useGleanConfig, GuestAuthProvider } from '../../utils';
 import useThemeChange from '../../hooks/useThemeChange';
+import { useGleanSDK } from '../../hooks/useGleanSDK';
 
 export default function SearchBar() {
   const containerRef = useRef<HTMLSpanElement>(null);
   const { options } = useGleanConfig();
-  const guestAuth = useGuestAuthOptional();
-  const abortControllerRef = useRef<AbortController | null>(null);
+  const { initializeSDK, cleanup } = useGleanSDK();
   const backend = (options.searchOptions as ModalSearchOptions)?.backend;
 
   const initializeSearch = useCallback(
@@ -23,42 +18,17 @@ export default function SearchBar() {
         return;
       }
 
-      abortControllerRef.current?.abort();
-      abortControllerRef.current = new AbortController();
-      const { signal } = abortControllerRef.current;
-
-      try {
-        const { attach } = await import('@gleanwork/web-sdk');
-
-        if (signal.aborted) return;
-
-        let searchOptions: ModalSearchOptions = {
-          ...(options.searchOptions as Required<ModalSearchOptions>),
-          themeVariant,
-        };
-
-        if (guestAuth && !guestAuth.isLoading && guestAuth.authToken.token) {
-          searchOptions = await applyGuestAuth(
-            options,
-            searchOptions,
-            guestAuth.authToken,
-            async () => {
-              await guestAuth.refreshToken();
-              return guestAuth.authToken;
-            },
-          );
-        }
-
-        if (signal.aborted || !containerRef.current) return;
-
-        attach(containerRef.current, searchOptions);
-      } catch (error) {
-        if (!signal.aborted) {
-          console.error('Failed to initialize search:', error);
-        }
-      }
+      await initializeSDK(
+        themeVariant,
+        options.searchOptions as ModalSearchOptions,
+        (sdk, finalOptions) => {
+          if (containerRef.current) {
+            sdk.attach(containerRef.current, finalOptions);
+          }
+        },
+      );
     },
-    [options, guestAuth],
+    [initializeSDK, options.searchOptions],
   );
 
   const handleThemeChange = useCallback(
@@ -85,10 +55,8 @@ export default function SearchBar() {
 
     initializeOnMount();
 
-    return () => {
-      abortControllerRef.current?.abort();
-    };
-  }, [initializeSearch, initialTheme]);
+    return cleanup;
+  }, [initializeSearch, initialTheme, cleanup]);
 
   const searchElement = (
     <span ref={containerRef}>
