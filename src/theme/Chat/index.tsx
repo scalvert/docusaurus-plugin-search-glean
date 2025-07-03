@@ -1,11 +1,12 @@
 import { type ReactNode, useEffect, useRef, useCallback, useMemo } from 'react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import type { ThemeVariant, ChatOptions } from '@gleanwork/web-sdk';
 
 import useThemeChange from '../../hooks/useThemeChange';
 import { useGleanConfig, GuestAuthProvider } from '../../utils';
 import { useGleanSDK } from '../../hooks/useGleanSDK';
 
-export default function ChatPage(): ReactNode {
+function ChatInner(): ReactNode {
   const containerRef = useRef<HTMLDivElement>(null);
   const { options } = useGleanConfig();
   const { initializeSDK, cleanup } = useGleanSDK();
@@ -75,4 +76,10 @@ export default function ChatPage(): ReactNode {
   }
 
   return chatElement;
+}
+
+export default function Chat(): ReactNode {
+  const fallback = <div style={{ height: '85vh', width: '100%', position: 'relative' }} />;
+
+  return <BrowserOnly fallback={fallback}>{() => <ChatInner />}</BrowserOnly>;
 }

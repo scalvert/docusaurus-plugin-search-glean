@@ -1,4 +1,5 @@
 import { useEffect, useRef, useCallback, useMemo } from 'react';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import type { ModalSearchOptions, ThemeVariant } from '@gleanwork/web-sdk';
 
 import { SearchButton } from '../SearchButton';
@@ -6,7 +7,7 @@ import { useGleanConfig, GuestAuthProvider } from '../../utils';
 import useThemeChange from '../../hooks/useThemeChange';
 import { useGleanSDK } from '../../hooks/useGleanSDK';
 
-export default function SearchBar() {
+function SearchBarInner() {
   const containerRef = useRef<HTMLSpanElement>(null);
   const { options } = useGleanConfig();
   const { initializeSDK, cleanup } = useGleanSDK();
@@ -74,4 +75,14 @@ export default function SearchBar() {
   }
 
   return searchElement;
+}
+
+export default function SearchBar() {
+  const fallback = (
+    <span>
+      <SearchButton />
+    </span>
+  );
+
+  return <BrowserOnly fallback={fallback}>{() => <SearchBarInner />}</BrowserOnly>;
 }
