@@ -77,7 +77,7 @@ This plugin can be configured to use both Glean's search or chat features, or bo
 
    In order to achieve this, you will need to create a Glean collection for your documentation. You can do this by:
    1. Creating a new Glean collection in the Glean UI.
-   2. Creating an automated collctions sync using GitHub Actions workflows and the [Glean Collections Sync](https://github.com/scalvert/glean-collections-sync) action. This action can be configured to sync a list of collection sync configs, the configuration used to produce these collections, to Glean. This will ensure that the collections are always up-to-date with the current state of your documentation.
+   2. Creating an automated collections sync using GitHub Actions workflows and the [Glean Collections Sync](https://github.com/scalvert/glean-collections-sync) action. This action can be configured to sync a list of collection sync configs, the configuration used to produce these collections, to Glean. This will ensure that the collections are always up-to-date with the current state of your documentation.
 
    Example:
 
