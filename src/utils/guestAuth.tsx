@@ -84,7 +84,7 @@ export function GuestAuthProvider({ children, pluginOptions, backend }: GuestAut
     refreshToken,
   };
 
-  return React.createElement(GuestAuthContext.Provider, { value: contextValue }, children);
+  return <GuestAuthContext.Provider value={contextValue}>{children}</GuestAuthContext.Provider>;
 }
 
 export function useGuestAuth(): GuestAuthContextValue {
@@ -122,7 +122,3 @@ export async function applyGuestAuth<T extends { backend?: string }>(
     onAuthTokenRequired,
   };
 }
-
-
-
-
