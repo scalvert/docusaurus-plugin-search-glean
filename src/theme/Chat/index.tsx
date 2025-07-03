@@ -1,14 +1,17 @@
 import { type ReactNode, useEffect, useRef, useCallback } from 'react';
-import { usePluginData } from '@docusaurus/useGlobalData';
 import GleanWebSDK, { type ThemeVariant, type ChatOptions } from '@gleanwork/web-sdk';
 
-import { PluginOptions } from '../../options';
 import useThemeChange from '../../hooks/useThemeChange';
-import { useGuestAuthOptional, applyGuestAuth, GuestAuthProvider } from '../../utils';
+import {
+  useGleanConfig,
+  useGuestAuthOptional,
+  applyGuestAuth,
+  GuestAuthProvider,
+} from '../../utils';
 
 export default function ChatPage(): ReactNode {
   const containerRef = useRef<HTMLDivElement>(null);
-  const { options } = usePluginData('docusaurus-plugin-search-glean') as { options: PluginOptions };
+  const { options } = useGleanConfig();
   const guestAuth = useGuestAuthOptional();
   const abortControllerRef = useRef<AbortController | null>(null);
   const backend = (options.chatOptions as ChatOptions)?.backend;
