@@ -32,7 +32,7 @@ export function GuestAuthProvider({ children, pluginOptions, backend }: GuestAut
   const [error, setError] = useState<Error | null>(null);
   const [guestAuthProvider, setGuestAuthProvider] = useState<SDKGuestAuthProvider | null>(null);
 
-  const shouldUseGuestAuth = pluginOptions.enableAnonymousAuth && backend;
+  const shouldUseGuestAuth = pluginOptions.enableAnonymousAuth && !!backend;
 
   useEffect(() => {
     if (shouldUseGuestAuth) {

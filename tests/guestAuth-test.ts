@@ -4,10 +4,12 @@ import type { PluginOptions } from '../src/options';
 
 vi.mock('@gleanwork/web-sdk', () => ({
   createGuestAuthProvider: vi.fn(() => ({
-    getAuthToken: vi.fn(() => Promise.resolve({
-      token: 'test-token',
-      expirationTime: Date.now() + 3600000,
-    })),
+    getAuthToken: vi.fn(() =>
+      Promise.resolve({
+        token: 'test-token',
+        expirationTime: Date.now() + 3600000,
+      }),
+    ),
   })),
 }));
 
@@ -53,7 +55,12 @@ describe('Guest Authentication', () => {
       const authToken = { token: 'test', expirationTime: Date.now() + 3600000 };
       const onAuthTokenRequired = vi.fn();
 
-      const result = await applyGuestAuth(mockOptions, searchOptions, authToken, onAuthTokenRequired);
+      const result = await applyGuestAuth(
+        mockOptions,
+        searchOptions,
+        authToken,
+        onAuthTokenRequired,
+      );
 
       expect(result).toEqual({
         ...searchOptions,
@@ -62,4 +69,4 @@ describe('Guest Authentication', () => {
       });
     });
   });
-}); 
+});

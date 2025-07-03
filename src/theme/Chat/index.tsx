@@ -1,4 +1,4 @@
-import { type ReactNode, useEffect, useRef, useCallback } from 'react';
+import { type ReactNode, useEffect, useRef, useCallback, useMemo } from 'react';
 import type { ThemeVariant, ChatOptions } from '@gleanwork/web-sdk';
 
 import useThemeChange from '../../hooks/useThemeChange';
@@ -11,19 +11,21 @@ export default function ChatPage(): ReactNode {
   const { initializeSDK, cleanup } = useGleanSDK();
   const backend = (options.chatOptions as ChatOptions)?.backend;
 
+  const chatOptions = useMemo(() => options.chatOptions as ChatOptions, [options.chatOptions]);
+
   const initializeChat = useCallback(
     async (themeVariant: ThemeVariant = 'light') => {
       if (!containerRef.current) {
         return;
       }
 
-      await initializeSDK(themeVariant, options.chatOptions as ChatOptions, (sdk, finalOptions) => {
+      await initializeSDK(themeVariant, chatOptions, (sdk, finalOptions) => {
         if (containerRef.current) {
           sdk.default.renderChat(containerRef.current, finalOptions);
         }
       });
     },
-    [initializeSDK, options.chatOptions],
+    [initializeSDK, chatOptions],
   );
 
   const handleThemeChange = useCallback(
@@ -64,7 +66,7 @@ export default function ChatPage(): ReactNode {
     />
   );
 
-  if (options.enableAnonymousAuth && backend) {
+  if (options.enableAnonymousAuth && !!backend) {
     return (
       <GuestAuthProvider pluginOptions={options} backend={backend}>
         {chatElement}

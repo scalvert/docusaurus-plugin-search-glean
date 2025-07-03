@@ -1,4 +1,4 @@
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useRef, useCallback, useMemo } from 'react';
 import type { ModalSearchOptions, ThemeVariant } from '@gleanwork/web-sdk';
 
 import { SearchButton } from '../SearchButton';
@@ -12,23 +12,24 @@ export default function SearchBar() {
   const { initializeSDK, cleanup } = useGleanSDK();
   const backend = (options.searchOptions as ModalSearchOptions)?.backend;
 
+  const searchOptions = useMemo(
+    () => options.searchOptions as ModalSearchOptions,
+    [options.searchOptions],
+  );
+
   const initializeSearch = useCallback(
     async (themeVariant: ThemeVariant = 'light') => {
       if (!containerRef.current) {
         return;
       }
 
-      await initializeSDK(
-        themeVariant,
-        options.searchOptions as ModalSearchOptions,
-        (sdk, finalOptions) => {
-          if (containerRef.current) {
-            sdk.attach(containerRef.current, finalOptions);
-          }
-        },
-      );
+      await initializeSDK(themeVariant, searchOptions, (sdk, finalOptions) => {
+        if (containerRef.current) {
+          sdk.attach(containerRef.current, finalOptions);
+        }
+      });
     },
-    [initializeSDK, options.searchOptions],
+    [initializeSDK, searchOptions],
   );
 
   const handleThemeChange = useCallback(
