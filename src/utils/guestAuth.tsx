@@ -1,8 +1,7 @@
 import React, { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import {
-  createGuestAuthProvider,
-  type AuthTokenDetails,
-  type GuestAuthProvider as SDKGuestAuthProvider,
+import type {
+  AuthTokenDetails,
+  GuestAuthProvider as SDKGuestAuthProvider,
 } from '@gleanwork/web-sdk';
 import type { PluginOptions } from '../options';
 
@@ -35,12 +34,22 @@ export function GuestAuthProvider({ children, pluginOptions, backend }: GuestAut
   const shouldUseGuestAuth = pluginOptions.enableAnonymousAuth && !!backend;
 
   useEffect(() => {
-    if (shouldUseGuestAuth) {
-      const provider = createGuestAuthProvider({ backend });
-      setGuestAuthProvider(provider);
-    } else {
-      setGuestAuthProvider(null);
-    }
+    const initializeProvider = async () => {
+      if (shouldUseGuestAuth) {
+        try {
+          const { createGuestAuthProvider } = await import('@gleanwork/web-sdk');
+          const provider = createGuestAuthProvider({ backend });
+          setGuestAuthProvider(provider);
+        } catch (error) {
+          console.error('Failed to create guest auth provider:', error);
+          setGuestAuthProvider(null);
+        }
+      } else {
+        setGuestAuthProvider(null);
+      }
+    };
+
+    initializeProvider();
   }, [shouldUseGuestAuth, backend]);
 
   const refreshToken = useCallback(async () => {

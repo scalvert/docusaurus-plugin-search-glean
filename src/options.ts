@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import type { OptionValidationContext } from '@docusaurus/types';
-import { ChatOptions, ModalSearchOptions } from '@gleanwork/web-sdk';
+import type { ChatOptions, ModalSearchOptions } from '@gleanwork/web-sdk';
 import mergeWith from 'lodash/mergeWith';
 
 export type PluginOptions = {

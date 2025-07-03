@@ -1,17 +1,18 @@
-
 ## v0.5.0 (2025-07-03)
 
 #### :rocket: Enhancement
-* [#9](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/9) Add guest auth option ([@scalvert](https://github.com/scalvert))
-* [#7](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/7) Dynamically load `@gleanwork/web-sdk` to fix SSR ([@be9](https://github.com/be9))
+
+- [#9](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/9) Add guest auth option ([@scalvert](https://github.com/scalvert))
+- [#7](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/7) Dynamically load `@gleanwork/web-sdk` to fix SSR ([@be9](https://github.com/be9))
 
 #### :house: Internal
-* [#8](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/8) Upgrade dependencies ([@scalvert](https://github.com/scalvert))
+
+- [#8](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/8) Upgrade dependencies ([@scalvert](https://github.com/scalvert))
 
 #### Committers: 2
+
 - Oleg Dashevskii ([@be9](https://github.com/be9))
 - Steve Calvert ([@scalvert](https://github.com/scalvert))
-
 
 ## v0.4.1 (2024-11-19)
 
