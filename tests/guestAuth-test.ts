@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { getGuestAuthProvider, applyGuestAuth } from '../src/utils/guestAuth';
+import { applyGuestAuth } from '../src/utils/guestAuth';
 import type { PluginOptions } from '../src/options';
 
 vi.mock('@gleanwork/web-sdk', () => ({
@@ -21,36 +21,6 @@ describe('Guest Authentication', () => {
 
   beforeEach(() => {
     vi.clearAllMocks();
-  });
-
-  describe('getGuestAuthProvider', () => {
-    it('returns null when anonymous auth is disabled', () => {
-      const options = { ...mockOptions, enableAnonymousAuth: false };
-      const provider = getGuestAuthProvider(options, 'https://example.com');
-      expect(provider).toBeNull();
-    });
-
-    it('returns null when no backend is provided', () => {
-      const provider = getGuestAuthProvider(mockOptions);
-      expect(provider).toBeNull();
-    });
-
-    it('returns a provider when anonymous auth is enabled and backend is provided', () => {
-      const provider = getGuestAuthProvider(mockOptions, 'https://example.com');
-      expect(provider).not.toBeNull();
-    });
-
-    it('reuses the same provider for the same backend', () => {
-      const provider1 = getGuestAuthProvider(mockOptions, 'https://example.com');
-      const provider2 = getGuestAuthProvider(mockOptions, 'https://example.com');
-      expect(provider1).toBe(provider2);
-    });
-
-    it('creates a new provider for different backends', () => {
-      const provider1 = getGuestAuthProvider(mockOptions, 'https://example1.com');
-      const provider2 = getGuestAuthProvider(mockOptions, 'https://example2.com');
-      expect(provider1).not.toBe(provider2);
-    });
   });
 
   describe('applyGuestAuth', () => {

@@ -16,8 +16,6 @@ export {
   useGuestAuth,
   useGuestAuthOptional,
   applyGuestAuth,
-  applyGuestAuthLegacy,
-  getGuestAuthProvider,
 } from './guestAuth';
 
 /**
