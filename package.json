@@ -36,10 +36,11 @@
     "build": "tsc --build && node ./scripts/copyUntypedFiles.mjs",
     "build:watch": "tsc --build --watch",
     "copy:watch": "node ./scripts/copyUntypedFiles.js --watch",
-    "format": "prettier --write ./src",
-    "lint": "eslint --cache --report-unused-disable-directives ./src",
+    "format": "prettier --write .",
+    "lint": "prettier --check . && eslint --cache --report-unused-disable-directives ./src",
     "release": "rm -rf lib && yarn build && release-it",
     "test": "vitest run",
+    "test:all": "yarn lint && yarn test",
     "watch": "run-p -c copy:watch build:watch"
   },
   "dependencies": {
@@ -71,7 +72,7 @@
     "release-it": "17.11.0",
     "run-p": "^0.0.0",
     "tslib": "2.8.1",
-    "typescript": "5.8.3",
+    "typescript": "5.5.4",
     "vitest": "1.6.1"
   },
   "peerDependencies": {

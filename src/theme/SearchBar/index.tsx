@@ -1,40 +1,77 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useCallback, useMemo } from 'react';
 import type { ModalSearchOptions, ThemeVariant } from '@gleanwork/web-sdk';
 
 import { SearchButton } from '../SearchButton';
-import { useGleanConfig } from '../../utils';
+import { useGleanConfig, GuestAuthProvider } from '../../utils';
 import useThemeChange from '../../hooks/useThemeChange';
+import { useGleanSDK } from '../../hooks/useGleanSDK';
 
-export default function SearchBarWrapper() {
+export default function SearchBar() {
   const containerRef = useRef<HTMLSpanElement>(null);
   const { options } = useGleanConfig();
+  const { initializeSDK, cleanup } = useGleanSDK();
+  const backend = (options.searchOptions as ModalSearchOptions)?.backend;
 
-  const initializeSearch = (themeVariant: ThemeVariant = 'light') => {
-    if (containerRef.current) {
-      import('@gleanwork/web-sdk')
-        .then(({ attach }) => {
-          attach(containerRef.current!, {
-            ...(options.searchOptions as Required<ModalSearchOptions>),
-            themeVariant,
-          });
-        })
-        .catch((error) => {
-          console.error('Failed to load @gleanwork/web-sdk:', error);
-        });
-    }
-  };
+  const searchOptions = useMemo(
+    () => options.searchOptions as ModalSearchOptions,
+    [options.searchOptions],
+  );
 
-  const initialTheme = useThemeChange((theme) => {
-    initializeSearch(theme);
-  });
+  const initializeSearch = useCallback(
+    async (themeVariant: ThemeVariant = 'light') => {
+      if (!containerRef.current) {
+        return;
+      }
+
+      await initializeSDK(themeVariant, searchOptions, (sdk, finalOptions) => {
+        if (containerRef.current) {
+          sdk.attach(containerRef.current, finalOptions);
+        }
+      });
+    },
+    [initializeSDK, searchOptions],
+  );
+
+  const handleThemeChange = useCallback(
+    async (theme: ThemeVariant) => {
+      try {
+        await initializeSearch(theme);
+      } catch (error) {
+        console.error('Failed to initialize search on theme change:', error);
+      }
+    },
+    [initializeSearch],
+  );
+
+  const initialTheme = useThemeChange(handleThemeChange);
 
   useEffect(() => {
-    initializeSearch(initialTheme);
-  });
+    const initializeOnMount = async () => {
+      try {
+        await initializeSearch(initialTheme);
+      } catch (error) {
+        console.error('Failed to initialize search on mount:', error);
+      }
+    };
 
-  return (
+    initializeOnMount();
+
+    return cleanup;
+  }, [initializeSearch, initialTheme, cleanup]);
+
+  const searchElement = (
     <span ref={containerRef}>
       <SearchButton />
     </span>
   );
+
+  if (options.enableAnonymousAuth && backend) {
+    return (
+      <GuestAuthProvider pluginOptions={options} backend={backend}>
+        {searchElement}
+      </GuestAuthProvider>
+    );
+  }
+
+  return searchElement;
 }
