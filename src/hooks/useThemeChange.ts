@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import useIsBrowser from '@docusaurus/useIsBrowser';
 import type { ThemeVariant } from '@gleanwork/web-sdk';
 
 interface ThemeChangeCallback {
@@ -6,17 +7,24 @@ interface ThemeChangeCallback {
 }
 
 export default function useThemeChange(callback: ThemeChangeCallback): ThemeVariant {
-  const [theme, setTheme] = useState<ThemeVariant>(() => {
-    const savedTheme = typeof window !== 'undefined' ? localStorage.getItem('theme') : 'light';
+  // Always start with a deterministic value so SSR and first client render match
+  const [theme, setTheme] = useState<ThemeVariant>('light');
 
-    return savedTheme === 'dark' ? 'dark' : 'light';
-  });
+  const isBrowser = useIsBrowser();
 
+  // After hydration, read persisted theme and notify the caller
   useEffect(() => {
+    if (!isBrowser) return;
+
+    const savedTheme = localStorage.getItem('theme');
+    const currentTheme: ThemeVariant = savedTheme === 'dark' ? 'dark' : 'light';
+
+    setTheme(currentTheme);
+    callback(currentTheme);
+
     const handleStorageChange = (event: StorageEvent) => {
       if (event.key === 'theme' && (event.newValue === 'light' || event.newValue === 'dark')) {
         const newTheme: ThemeVariant = event.newValue;
-
         setTheme(newTheme);
         callback(newTheme);
       }
@@ -24,17 +32,10 @@ export default function useThemeChange(callback: ThemeChangeCallback): ThemeVari
 
     window.addEventListener('storage', handleStorageChange);
 
-    window.addEventListener('DOMContentLoaded', () => {
-      const currentTheme: ThemeVariant =
-        localStorage.getItem('theme') === 'dark' ? 'dark' : 'light';
-      setTheme(currentTheme);
-      callback(currentTheme);
-    });
-
     return () => {
       window.removeEventListener('storage', handleStorageChange);
     };
-  }, [callback]);
+  }, [callback, isBrowser]);
 
   return theme;
 }
