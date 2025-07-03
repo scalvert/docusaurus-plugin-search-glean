@@ -1,5 +1,5 @@
 import { type ReactNode, useEffect, useRef, useCallback } from 'react';
-import GleanWebSDK, { type ThemeVariant, type ChatOptions } from '@gleanwork/web-sdk';
+import type { ThemeVariant, ChatOptions } from '@gleanwork/web-sdk';
 
 import useThemeChange from '../../hooks/useThemeChange';
 import {
@@ -27,6 +27,10 @@ export default function ChatPage(): ReactNode {
       const { signal } = abortControllerRef.current;
 
       try {
+        const { default: GleanWebSDK } = await import('@gleanwork/web-sdk');
+
+        if (signal.aborted) return;
+
         let chatOptions = { ...(options.chatOptions || {}), themeVariant };
 
         if (guestAuth && !guestAuth.isLoading && guestAuth.authToken.token) {
