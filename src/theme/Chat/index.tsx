@@ -6,11 +6,12 @@ import { PluginOptions } from '../../options';
 import useThemeChange from '../../hooks/useThemeChange';
 import { useGuestAuthOptional, applyGuestAuth, GuestAuthProvider } from '../../utils';
 
-function ChatComponent(): ReactNode {
+export default function ChatPage(): ReactNode {
   const containerRef = useRef<HTMLDivElement>(null);
   const { options } = usePluginData('docusaurus-plugin-search-glean') as { options: PluginOptions };
   const guestAuth = useGuestAuthOptional();
   const abortControllerRef = useRef<AbortController | null>(null);
+  const backend = (options.chatOptions as ChatOptions)?.backend;
 
   const initializeChat = useCallback(async (themeVariant: ThemeVariant = 'light') => {
     if (!containerRef.current) {
@@ -72,7 +73,7 @@ function ChatComponent(): ReactNode {
     };
   }, [initializeChat, initialTheme]);
 
-  return (
+  const chatElement = (
     <div
       ref={containerRef}
       style={{
@@ -82,19 +83,14 @@ function ChatComponent(): ReactNode {
       }}
     />
   );
-}
 
-export default function ChatPage(): ReactNode {
-  const { options } = usePluginData('docusaurus-plugin-search-glean') as { options: PluginOptions };
-  const backend = (options.chatOptions as ChatOptions)?.backend;
-
-  if (!options.enableAnonymousAuth || !backend) {
-    return <ChatComponent />;
+  if (options.enableAnonymousAuth && backend) {
+    return (
+      <GuestAuthProvider pluginOptions={options} backend={backend}>
+        {chatElement}
+      </GuestAuthProvider>
+    );
   }
 
-  return (
-    <GuestAuthProvider pluginOptions={options} backend={backend}>
-      <ChatComponent />
-    </GuestAuthProvider>
-  );
+  return chatElement;
 }

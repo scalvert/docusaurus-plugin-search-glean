@@ -5,11 +5,12 @@ import { SearchButton } from '../SearchButton';
 import { useGleanConfig, useGuestAuthOptional, applyGuestAuth, GuestAuthProvider } from '../../utils';
 import useThemeChange from '../../hooks/useThemeChange';
 
-function SearchBarWrapper() {
+export default function SearchBar() {
   const containerRef = useRef<HTMLSpanElement>(null);
   const { options } = useGleanConfig();
   const guestAuth = useGuestAuthOptional();
   const abortControllerRef = useRef<AbortController | null>(null);
+  const backend = (options.searchOptions as ModalSearchOptions)?.backend;
 
   const initializeSearch = useCallback(async (themeVariant: ThemeVariant = 'light') => {
     if (!containerRef.current) {
@@ -78,26 +79,19 @@ function SearchBarWrapper() {
     };
   }, [initializeSearch, initialTheme]);
 
-  return (
+  const searchElement = (
     <span ref={containerRef}>
       <SearchButton />
     </span>
   );
-}
 
-function SearchBarWithAuth() {
-  const { options } = useGleanConfig();
-  const backend = (options.searchOptions as ModalSearchOptions)?.backend;
-
-  if (!options.enableAnonymousAuth || !backend) {
-    return <SearchBarWrapper />;
+  if (options.enableAnonymousAuth && backend) {
+    return (
+      <GuestAuthProvider pluginOptions={options} backend={backend}>
+        {searchElement}
+      </GuestAuthProvider>
+    );
   }
 
-  return (
-    <GuestAuthProvider pluginOptions={options} backend={backend}>
-      <SearchBarWrapper />
-    </GuestAuthProvider>
-  );
+  return searchElement;
 }
-
-export default SearchBarWithAuth;

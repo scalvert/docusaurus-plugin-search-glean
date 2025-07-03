@@ -19,7 +19,7 @@ export {
   applyGuestAuthLegacy,
   getGuestAuthProvider 
 } from './guestAuth';
-export { withGuestAuth } from './withGuestAuth';
+
 
 /**
  * Formats the page's title based on relevant site config and other contexts.
