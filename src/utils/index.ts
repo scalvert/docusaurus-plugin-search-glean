@@ -11,7 +11,15 @@
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { usePluginData } from '@docusaurus/useGlobalData';
 import { PluginOptions } from '../options';
-export { applyGuestAuth, getGuestAuthProvider } from './guestAuth';
+export { 
+  GuestAuthProvider, 
+  useGuestAuth, 
+  useGuestAuthOptional, 
+  applyGuestAuth, 
+  applyGuestAuthLegacy,
+  getGuestAuthProvider 
+} from './guestAuth';
+export { withGuestAuth } from './withGuestAuth';
 
 /**
  * Formats the page's title based on relevant site config and other contexts.
