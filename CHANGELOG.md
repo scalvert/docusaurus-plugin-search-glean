@@ -1,12 +1,12 @@
-
 ## v0.5.2 (2025-07-03)
 
 #### :bug: Bug Fix
-* [#10](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/10) fix: Fixes SSR by guarding with <BrowserOnly> ([@scalvert](https://github.com/scalvert))
+
+- [#10](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/10) fix: Fixes SSR by guarding with <BrowserOnly> ([@scalvert](https://github.com/scalvert))
 
 #### Committers: 1
-- Steve Calvert ([@scalvert](https://github.com/scalvert))
 
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
 
 ## v0.5.1 (2025-07-03)
 
