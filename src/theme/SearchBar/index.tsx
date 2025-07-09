@@ -11,7 +11,6 @@ function SearchBarInner() {
   const containerRef = useRef<HTMLSpanElement>(null);
   const { options } = useGleanConfig();
   const { initializeSDK, cleanup } = useGleanSDK();
-  const backend = (options.searchOptions as ModalSearchOptions)?.backend;
 
   const searchOptions = useMemo(
     () => options.searchOptions as ModalSearchOptions,
@@ -60,21 +59,26 @@ function SearchBarInner() {
     return cleanup;
   }, [initializeSearch, initialTheme, cleanup]);
 
-  const searchElement = (
+  return (
     <span ref={containerRef}>
       <SearchButton />
     </span>
   );
+}
+
+function SearchBarWrapper() {
+  const { options } = useGleanConfig();
+  const backend = (options.searchOptions as ModalSearchOptions)?.backend;
 
   if (options.enableAnonymousAuth && backend) {
     return (
       <GuestAuthProvider pluginOptions={options} backend={backend}>
-        {searchElement}
+        <SearchBarInner />
       </GuestAuthProvider>
     );
   }
 
-  return searchElement;
+  return <SearchBarInner />;
 }
 
 export default function SearchBar() {
@@ -84,5 +88,5 @@ export default function SearchBar() {
     </span>
   );
 
-  return <BrowserOnly fallback={fallback}>{() => <SearchBarInner />}</BrowserOnly>;
+  return <BrowserOnly fallback={fallback}>{() => <SearchBarWrapper />}</BrowserOnly>;
 }

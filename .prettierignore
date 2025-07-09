@@ -1,0 +1,6 @@
+lib/
+dist/
+
+node_modules/
+
+CHANGELOG.md
