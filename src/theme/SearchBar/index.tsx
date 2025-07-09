@@ -25,7 +25,7 @@ function SearchBarInner() {
 
       await initializeSDK(themeVariant, searchOptions, (sdk, finalOptions) => {
         if (containerRef.current) {
-          sdk.default.attach(containerRef.current, finalOptions);
+          sdk.attach(containerRef.current, finalOptions);
         }
       });
     },

@@ -17,7 +17,7 @@ export function useGleanSDK() {
       themeVariant: ThemeVariant = 'light',
       sdkOptions: T,
       callback: (
-        sdk: typeof import('@gleanwork/web-sdk'),
+        sdk: typeof import('@gleanwork/web-sdk').default,
         finalOptions: T & { themeVariant: ThemeVariant },
       ) => void,
     ) => {
@@ -51,7 +51,7 @@ export function useGleanSDK() {
 
         if (signal.aborted) return;
 
-        callback(sdk, finalOptions);
+        callback(sdk.default, finalOptions);
       } catch (error) {
         if (!signal.aborted) {
           console.error('Failed to initialize SDK:', error);

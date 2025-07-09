@@ -22,7 +22,7 @@ function ChatInner(): ReactNode {
 
       await initializeSDK(themeVariant, chatOptions, (sdk, finalOptions) => {
         if (containerRef.current) {
-          sdk.default.renderChat(containerRef.current, finalOptions);
+          sdk.renderChat(containerRef.current, finalOptions);
         }
       });
     },
