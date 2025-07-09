@@ -1,4 +1,14 @@
 
+
+## v0.5.3 (2025-07-09)
+
+#### :bug: Bug Fix
+* [#11](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/11) fix: Updates search context to correctly pass guest auth down to the subcomponent ([@aureliawang-glean](https://github.com/aureliawang-glean))
+
+#### Committers: 1
+- Aurelia Wang ([@aureliawang-glean](https://github.com/aureliawang-glean))
+
+
 ## v0.5.2 (2025-07-03)
 
 #### :bug: Bug Fix
