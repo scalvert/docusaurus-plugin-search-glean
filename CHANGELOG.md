@@ -1,5 +1,15 @@
 
 
+
+## v0.5.4 (2025-07-10)
+
+#### :bug: Bug Fix
+* [#12](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/12) Fix mobile search button focus issue ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v0.5.3 (2025-07-09)
 
 #### :bug: Bug Fix
