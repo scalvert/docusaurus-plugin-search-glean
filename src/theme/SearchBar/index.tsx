@@ -83,7 +83,11 @@ function SearchBarWrapper() {
 }
 
 export default function SearchBar() {
-  const fallback = <SearchButton />;
+  const fallback = (
+    <div className="searchContainer">
+      <SearchButton />
+    </div>
+  );
 
   return <BrowserOnly fallback={fallback}>{() => <SearchBarWrapper />}</BrowserOnly>;
 }
