@@ -60,7 +60,7 @@ function SearchBarInner() {
   }, [initializeSearch, initialTheme, cleanup]);
 
   return (
-    <div ref={containerRef} style={{ display: 'inline-block' }}>
+    <div ref={containerRef} style={{ display: 'inline-block' }} tabIndex={0} role="button">
       <SearchButton />
     </div>
   );
@@ -83,7 +83,7 @@ function SearchBarWrapper() {
 
 export default function SearchBar() {
   const fallback = (
-    <div style={{ display: 'inline-block' }}>
+    <div style={{ display: 'inline-block' }} tabIndex={0} role="button">
       <SearchButton />
     </div>
   );
