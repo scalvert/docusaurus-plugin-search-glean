@@ -8,7 +8,7 @@ import useThemeChange from '../../hooks/useThemeChange';
 import { useGleanSDK } from '../../hooks/useGleanSDK';
 
 function SearchBarInner() {
-  const containerRef = useRef<HTMLSpanElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
   const { options } = useGleanConfig();
   const { initializeSDK, cleanup } = useGleanSDK();
 
@@ -60,9 +60,9 @@ function SearchBarInner() {
   }, [initializeSearch, initialTheme, cleanup]);
 
   return (
-    <span ref={containerRef}>
+    <div ref={containerRef} style={{ display: 'inline-block' }}>
       <SearchButton />
-    </span>
+    </div>
   );
 }
 
@@ -83,9 +83,9 @@ function SearchBarWrapper() {
 
 export default function SearchBar() {
   const fallback = (
-    <span>
+    <div style={{ display: 'inline-block' }}>
       <SearchButton />
-    </span>
+    </div>
   );
 
   return <BrowserOnly fallback={fallback}>{() => <SearchBarWrapper />}</BrowserOnly>;
