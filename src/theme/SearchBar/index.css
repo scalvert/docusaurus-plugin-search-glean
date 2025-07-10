@@ -1,3 +1,5 @@
 .searchContainer {
   display: inline-block;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
