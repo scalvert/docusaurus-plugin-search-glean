@@ -6,6 +6,7 @@ import { SearchButton } from '../SearchButton';
 import { useGleanConfig, GuestAuthProvider } from '../../utils';
 import useThemeChange from '../../hooks/useThemeChange';
 import { useGleanSDK } from '../../hooks/useGleanSDK';
+import './index.css';
 
 function SearchBarInner() {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -60,7 +61,7 @@ function SearchBarInner() {
   }, [initializeSearch, initialTheme, cleanup]);
 
   return (
-    <div ref={containerRef} style={{ display: 'inline-block' }} tabIndex={0} role="button">
+    <div ref={containerRef} className="searchContainer">
       <SearchButton />
     </div>
   );
@@ -82,11 +83,7 @@ function SearchBarWrapper() {
 }
 
 export default function SearchBar() {
-  const fallback = (
-    <div style={{ display: 'inline-block' }} tabIndex={0} role="button">
-      <SearchButton />
-    </div>
-  );
+  const fallback = <SearchButton />;
 
   return <BrowserOnly fallback={fallback}>{() => <SearchBarWrapper />}</BrowserOnly>;
 }
