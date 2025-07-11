@@ -17,24 +17,26 @@ function SearchIcon() {
   );
 }
 
-export type DocSearchButtonProps = React.ComponentProps<'button'>;
+export type DocSearchButtonProps = React.ComponentProps<'input'>;
 
-export const SearchButton = React.forwardRef<HTMLButtonElement, DocSearchButtonProps>(
+export const SearchButton = React.forwardRef<HTMLInputElement, DocSearchButtonProps>(
   ({ ...props }, ref) => {
     return (
-      <button
-        type="button"
-        id="glean-button"
-        className="DocSearch DocSearch-Button"
-        aria-label="Search"
-        {...props}
-        ref={ref}
-      >
-        <span className="DocSearch-Button-Container">
+      <div className="DocSearch DocSearch-Button">
+        <input
+          type="text"
+          id="glean-search-input"
+          className="DocSearch-Button-Input"
+          placeholder="Search"
+          readOnly
+          aria-label="Search"
+          {...props}
+          ref={ref}
+        />
+        <div className="DocSearch-Button-Icon">
           <SearchIcon />
-          <span className="DocSearch-Button-Placeholder">Search</span>
-        </span>
-      </button>
+        </div>
+      </div>
     );
   },
 );

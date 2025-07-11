@@ -25,54 +25,97 @@ html[data-theme='dark'] {
 }
 
 .DocSearch-Button {
-  align-items: center;
   background: var(--ifm-navbar-search-input-background-color);
   border: 0;
   border-radius: 40px;
   color: var(--ifm-navbar-search-input-color);
   cursor: pointer;
-  display: flex;
-  font-weight: 500;
   height: 36px;
-  justify-content: space-between;
   margin: 0 0 0 16px;
-  padding: 0 8px;
-  user-select: none;
-  -webkit-tap-highlight-color: transparent;
-  touch-action: manipulation;
-  -webkit-user-select: none;
-  -webkit-touch-callout: none;
+  position: relative;
+  width: 200px;
+}
+
+@media (max-width: 750px) {
+  .DocSearch-Button {
+    width: 36px;
+  }
 }
 
 .DocSearch-Button:hover,
 .DocSearch-Button:active,
-.DocSearch-Button:focus {
+.DocSearch-Button:focus-within {
   box-shadow: var(--search-local-searchbox-shadow);
   outline: none;
 }
 
-.DocSearch-Button-Container {
+.DocSearch-Button-Input {
+  background: transparent;
+  border: none;
+  border-radius: 40px;
+  color: var(--ifm-navbar-search-input-color);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 500;
+  height: 100%;
+  left: 0;
+  outline: none;
+  padding: 0 16px 0 40px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+}
+
+@media (max-width: 750px) {
+  .DocSearch-Button-Input {
+    padding: 0 8px 0 32px;
+  }
+}
+
+.DocSearch-Button-Input:focus {
+  cursor: text;
+}
+
+.DocSearch-Button-Input::placeholder {
+  color: var(--ifm-navbar-search-input-color);
+  opacity: 0.7;
+}
+
+@media (max-width: 750px) {
+  .DocSearch-Button-Input::placeholder {
+    opacity: 0;
+  }
+}
+
+.DocSearch-Button-Icon {
   align-items: center;
   display: flex;
+  height: 100%;
+  left: 8px;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  z-index: 1;
 }
 
 .DocSearch-Search-Icon {
-  stroke-width: 1.6;
-}
-
-.DocSearch-Button .DocSearch-Search-Icon {
   color: var(--ifm-font-color-base);
-}
-
-.DocSearch-Button-Placeholder {
-  font-size: 1rem;
-  padding: 0 12px 0 6px;
+  flex-shrink: 0;
+  stroke-width: 1.6;
 }
 
 .DocSearch-Button-Keys {
   display: flex;
   min-width: calc(2 * 20px + 2 * 0.4em);
   margin-right: 6px;
+}
+
+@media (max-width: 750px) {
+  .DocSearch-Button-Keys {
+    display: none;
+  }
 }
 
 .DocSearch-Button-Key {
@@ -89,11 +132,4 @@ html[data-theme='dark'] {
   position: relative;
   top: -1px;
   width: 20px;
-}
-
-@media (max-width: 750px) {
-  .DocSearch-Button-Keys,
-  .DocSearch-Button-Placeholder {
-    display: none;
-  }
 }
