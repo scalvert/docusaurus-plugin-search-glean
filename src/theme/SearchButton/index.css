@@ -115,15 +115,15 @@ html[data-theme='dark'] {
   .DocSearch-Button-Keys {
     display: none;
   }
-  
+
   .DocSearch-Button {
     width: 36px;
   }
-  
+
   .DocSearch-Button-Input {
     padding: 0 8px 0 32px;
   }
-  
+
   .DocSearch-Button-Input::placeholder {
     opacity: 0;
   }
