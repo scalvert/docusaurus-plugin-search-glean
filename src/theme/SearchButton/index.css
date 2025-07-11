@@ -62,13 +62,13 @@ html[data-theme='dark'] {
   touch-action: manipulation;
 }
 
+.DocSearch-Button-Input:focus {
+  cursor: text;
+}
+
 .DocSearch-Button-Input::placeholder {
   color: var(--ifm-navbar-search-input-color);
   opacity: 0.7;
-}
-
-.DocSearch-Button-Input:focus {
-  cursor: text;
 }
 
 .DocSearch-Button-Icon {
@@ -111,10 +111,6 @@ html[data-theme='dark'] {
 }
 
 @media (max-width: 750px) {
-  .DocSearch-Button-Keys {
-    display: none;
-  }
-
   .DocSearch-Button {
     width: 36px;
   }
@@ -125,5 +121,9 @@ html[data-theme='dark'] {
 
   .DocSearch-Button-Input::placeholder {
     opacity: 0;
+  }
+
+  .DocSearch-Button-Keys {
+    display: none;
   }
 }
