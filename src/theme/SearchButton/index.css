@@ -38,6 +38,10 @@ html[data-theme='dark'] {
   margin: 0 0 0 16px;
   padding: 0 8px;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  -webkit-user-select: none;
+  -webkit-touch-callout: none;
 }
 
 .DocSearch-Button:hover,

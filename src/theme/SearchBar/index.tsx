@@ -9,7 +9,7 @@ import { useGleanSDK } from '../../hooks/useGleanSDK';
 import './index.css';
 
 function SearchBarInner() {
-  const containerRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const { options } = useGleanConfig();
   const { initializeSDK, cleanup } = useGleanSDK();
 
@@ -20,13 +20,13 @@ function SearchBarInner() {
 
   const initializeSearch = useCallback(
     async (themeVariant: ThemeVariant = 'light') => {
-      if (!containerRef.current) {
+      if (!buttonRef.current) {
         return;
       }
 
       await initializeSDK(themeVariant, searchOptions, (sdk, finalOptions) => {
-        if (containerRef.current) {
-          sdk.attach(containerRef.current, finalOptions);
+        if (buttonRef.current) {
+          sdk.attach(buttonRef.current, finalOptions);
         }
       });
     },
@@ -61,8 +61,8 @@ function SearchBarInner() {
   }, [initializeSearch, initialTheme, cleanup]);
 
   return (
-    <div ref={containerRef} className="searchContainer">
-      <SearchButton />
+    <div className="searchContainer">
+      <SearchButton ref={buttonRef} />
     </div>
   );
 }
