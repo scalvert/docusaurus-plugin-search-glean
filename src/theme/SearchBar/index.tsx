@@ -9,7 +9,12 @@ import { useGleanSDK } from '../../hooks/useGleanSDK';
 import './index.css';
 
 function SearchBarInner() {
-  const buttonRef = useRef<HTMLButtonElement>(null);
+  // IMPORTANT: Using HTMLInputElement instead of HTMLButtonElement is critical for iOS Safari compatibility.
+  // The Glean SDK expects to be attached to an input element that can receive focus events.
+  // Button elements on iOS Safari don't fire 'focusin' events when tapped, causing the search modal to not open.
+  // Input elements work consistently across all browsers, including iOS Safari and Chrome on iOS.
+  // DO NOT change this to HTMLButtonElement - it will break mobile Safari functionality.
+  const buttonRef = useRef<HTMLInputElement>(null);
   const { options } = useGleanConfig();
   const { initializeSDK, cleanup } = useGleanSDK();
 

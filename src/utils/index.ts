@@ -11,6 +11,7 @@
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
 import { usePluginData } from '@docusaurus/useGlobalData';
 import { PluginOptions } from '../options';
+
 export { GuestAuthProvider, useGuestAuth, useGuestAuthOptional, applyGuestAuth } from './guestAuth';
 
 /**
