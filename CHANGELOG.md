@@ -1,6 +1,19 @@
 
 
 
+
+## v0.5.5 (2025-07-11)
+
+#### :bug: Bug Fix
+* [#13](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/13) fix: Improve iOS Safari tap handling by attaching SDK directly to button ([@scalvert](https://github.com/scalvert))
+
+#### :house: Internal
+* [#14](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/14) chore: Adds yarn prepare to build on install ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v0.5.4 (2025-07-10)
 
 #### :bug: Bug Fix
