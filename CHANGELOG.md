@@ -2,6 +2,16 @@
 
 
 
+
+## v0.5.6 (2025-07-11)
+
+#### :bug: Bug Fix
+* [#15](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/15) Fix iOS Safari search modal focus issues ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v0.5.5 (2025-07-11)
 
 #### :bug: Bug Fix
