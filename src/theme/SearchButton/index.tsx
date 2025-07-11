@@ -23,18 +23,18 @@ export const SearchButton = React.forwardRef<HTMLInputElement, DocSearchButtonPr
   ({ ...props }, ref) => {
     return (
       <div className="DocSearch DocSearch-Button">
-        <div className="DocSearch-Button-Container">
+        <input
+          type="text"
+          id="glean-search-input"
+          className="DocSearch-Button-Input"
+          placeholder="Search"
+          readOnly
+          aria-label="Search"
+          {...props}
+          ref={ref}
+        />
+        <div className="DocSearch-Button-Icon">
           <SearchIcon />
-          <input
-            type="text"
-            id="glean-search-input"
-            className="DocSearch-Button-Input"
-            placeholder="Search"
-            readOnly
-            aria-label="Search"
-            {...props}
-            ref={ref}
-          />
         </div>
       </div>
     );
