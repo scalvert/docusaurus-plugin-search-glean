@@ -58,6 +58,8 @@ html[data-theme='dark'] {
   position: absolute;
   top: 0;
   width: 100%;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
 }
 
 .DocSearch-Button-Input::placeholder {
@@ -81,12 +83,9 @@ html[data-theme='dark'] {
 }
 
 .DocSearch-Search-Icon {
-  stroke-width: 1.6;
-}
-
-.DocSearch-Button .DocSearch-Search-Icon {
   color: var(--ifm-font-color-base);
   flex-shrink: 0;
+  stroke-width: 1.6;
 }
 
 .DocSearch-Button-Keys {
