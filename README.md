@@ -4,7 +4,7 @@ A Docusarus plugin to integrate Glean search into your Docusaurus site.
 
 ## Description
 
-This plugin utilizes Glean's JS SDK to enable both Glean search and AI App chat into your documentation. It is a drop-in replacement for the default Docusaurus search plugin.
+This plugin utilizes Glean's SDK to enable both Glean search and AI Agent chat into your documentation. It is a drop-in replacement for the default Docusaurus search plugin.
 
 ## Features
 
@@ -14,9 +14,9 @@ Enables you to integrate Glean's search into your Docusaurus site.
 
 ![Glean Search](./img/glean-search.png)
 
-### Glean Chat (AI App)
+### Glean Chat (AI Agent)
 
-Enables you to integrate Glean's AI App chat into your Docusaurus site (requires setting up an AI App in Glean).
+Enables you to integrate Glean's AI Agent chat into your Docusaurus site (requires setting up an AI Agent in Glean).
 
 ![Glean Chat](./img/glean-chat.png)
 
@@ -140,7 +140,7 @@ jobs:
 
 ## Chat Configuration
 
-The chat feature integrates Glean's AI App chat into your Docusaurus site. You can configure chat independently of the search feature.
+The chat feature integrates Glean's AI Agent chat into your Docusaurus site. You can configure chat independently of the search feature.
 
 ### Basic Plugin Setup for Chat
 
@@ -154,13 +154,15 @@ module.exports = {
       require.resolve('docusaurus-plugin-search-glean'),
       {
         chatOptions: {
-          applicationId: 'your-glean-app-id',
+          agentId: 'your-glean-agent-id',
         },
       },
     ],
   ],
 };
 ```
+
+> **Note:** The `agentId` property replaces the legacy `applicationId` property. While `applicationId` is still supported for backward compatibility, it will be deprecated in the future. We recommend using `agentId` for new implementations.
 
 ### Static Chat Configuration
 
@@ -174,7 +176,7 @@ module.exports = {
       require.resolve('docusaurus-plugin-search-glean'),
       {
         chatOptions: {
-          applicationId: 'your-glean-app-id',
+          agentId: 'your-glean-agent-id',
         },
       },
     ],
@@ -182,11 +184,11 @@ module.exports = {
 };
 ```
 
-**Note:** Changes to the site will **not** automatically update the knowledge sources for the Glean App - those changes must be made manually in Glean.
+**Note:** Changes to the site will **not** automatically update the knowledge sources for the Glean Agent - those changes must be made manually in Glean.
 
 ### Dynamic Chat Configuration with Collections
 
-For frequently changing documentation, use Glean **collections** to configure chat. The App's Knowledge Sources should be configured to use the collection.
+For frequently changing documentation, use Glean **collections** to configure chat. The Agent's Knowledge Sources should be configured to use the collection.
 
 Example configuration:
 
@@ -200,7 +202,7 @@ module.exports = {
       require.resolve('docusaurus-plugin-search-glean'),
       {
         chatOptions: {
-          applicationId: 'your-glean-app-id', // The App's Knowledge Sources should be configured to use the collection
+          agentId: 'your-glean-agent-id', // The Agent's Knowledge Sources should be configured to use the collection
         },
       },
     ],
@@ -265,7 +267,7 @@ If you've configured a custom `chatPagePath` in your plugin options, make sure t
   {
     chatPagePath: 'ai-assistant', // Custom path
     chatOptions: {
-      applicationId: 'your-glean-app-id',
+      agentId: 'your-glean-agent-id',
     },
   },
 ],
@@ -297,7 +299,7 @@ module.exports = {
           ],
         },
         chatOptions: {
-          applicationId: 'your-glean-app-id',
+          agentId: 'your-glean-agent-id',
         },
       },
     ],
