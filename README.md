@@ -152,6 +152,74 @@ module.exports = {
 };
 ```
 
+### Making the Chat Page Accessible
+
+When the chat feature is enabled, the plugin automatically creates a dedicated chat page (default path: `/chat`). However, **the plugin does not automatically add navigation links**. You need to manually add navigation elements to help users discover and access the chat functionality.
+
+#### Option 1: Add a Navbar Link
+
+Add a link to the chat page in your site's navigation bar by updating the `navbar.items` array in `docusaurus.config.js`:
+
+```js
+module.exports = {
+  // ...
+  themeConfig: {
+    navbar: {
+      items: [
+        // ... your existing navbar items
+        {
+          label: 'Chat',
+          to: '/chat', // Use the same path as your chatPagePath option
+          position: 'right',
+        },
+      ],
+    },
+  },
+};
+```
+
+#### Option 2: Add a Sidebar Link
+
+If you prefer to add the chat link to a sidebar, you can include it in your sidebar configuration:
+
+```js
+// sidebars.js
+module.exports = {
+  tutorialSidebar: [
+    // ... your existing sidebar items
+    {
+      type: 'link',
+      label: 'Chat',
+      href: '/chat', // Use the same path as your chatPagePath option
+    },
+  ],
+};
+```
+
+#### Custom Chat Page Path
+
+If you've configured a custom `chatPagePath` in your plugin options, make sure to use the same path in your navigation links:
+
+```js
+// Plugin configuration
+[
+  require.resolve('docusaurus-plugin-search-glean'),
+  {
+    chatPagePath: 'ai-assistant', // Custom path
+    chatOptions: {
+      applicationId: 'your-glean-app-id',
+    },
+  },
+],
+
+// Navbar link should match
+{
+  label: 'AI Assistant',
+  to: '/ai-assistant', // Match your custom chatPagePath
+  position: 'right',
+}
+```
+
 ### Options
 
 | Property              | Type                                   | Description                                                               |
