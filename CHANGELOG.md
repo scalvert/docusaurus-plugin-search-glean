@@ -3,6 +3,16 @@
 
 
 
+
+## v0.5.7 (2025-07-15)
+
+#### :memo: Documentation
+* [#16](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/16) docs: Improve REAME.md documentation for structure and accuracy ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v0.5.6 (2025-07-11)
 
 #### :bug: Bug Fix
