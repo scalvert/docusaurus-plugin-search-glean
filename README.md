@@ -262,7 +262,7 @@ If you've configured a custom `chatPagePath` in your plugin options, make sure t
 
 ```js
 // Plugin configuration
-[
+([
   require.resolve('docusaurus-plugin-search-glean'),
   {
     chatPagePath: 'ai-assistant', // Custom path
@@ -271,13 +271,12 @@ If you've configured a custom `chatPagePath` in your plugin options, make sure t
     },
   },
 ],
-
-// Navbar link should match
-{
-  label: 'AI Assistant',
-  to: '/ai-assistant', // Match your custom chatPagePath
-  position: 'right',
-}
+  // Navbar link should match
+  {
+    label: 'AI Assistant',
+    to: '/ai-assistant', // Match your custom chatPagePath
+    position: 'right',
+  });
 ```
 
 ## Using Both Features Together
