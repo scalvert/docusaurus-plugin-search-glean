@@ -2320,10 +2320,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@gleanwork/web-sdk@npm:^2.1.0":
-  version: 2.1.0
-  resolution: "@gleanwork/web-sdk@npm:2.1.0"
-  checksum: f8bb432191c58c2d930a4d9bc1208e26b76b8ceaa6945076ab52713049d2aadc1bb63cce3de72fb6e438e2f79fba68e9d0515b72d38331ba3ffbc9d9c0032c07
+"@gleanwork/web-sdk@npm:^2.3.0-next.0":
+  version: 2.3.0-next.0
+  resolution: "@gleanwork/web-sdk@npm:2.3.0-next.0"
+  checksum: e7b3533ca51e46e74546d601be3b74eb674cc95eac23fec0769651ec60a9d463da2d7296011f33939037179c2d01ca00709b3643797e06d6a2c32a5a2db963bc
   languageName: node
   linkType: hard
 
@@ -6062,7 +6062,7 @@ __metadata:
     "@docusaurus/types": 3.8.1
     "@docusaurus/utils": 3.8.1
     "@docusaurus/utils-validation": 3.8.1
-    "@gleanwork/web-sdk": ^2.1.0
+    "@gleanwork/web-sdk": ^2.3.0-next.0
     "@release-it-plugins/lerna-changelog": 7.0.0
     "@types/lodash": 4.17.20
     "@types/node": 20.19.4
