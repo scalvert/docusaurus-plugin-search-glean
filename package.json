@@ -40,6 +40,7 @@
     "lint": "prettier --check . && eslint --cache --report-unused-disable-directives ./src",
     "prepare": "yarn build",
     "release": "rm -rf lib && yarn build && release-it",
+    "schema:check": "tsc --noEmit --strict src/schemas.ts",
     "test": "vitest run",
     "test:all": "yarn lint && yarn test",
     "watch": "run-p -c copy:watch build:watch"
