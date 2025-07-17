@@ -4,6 +4,22 @@
 
 
 
+
+## v0.7.0 (2025-07-17)
+
+#### :rocket: Enhancement
+* [#18](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/18) refactor: Implements dynamic joi schema generation from SDK types ([@scalvert](https://github.com/scalvert))
+
+#### :bug: Bug Fix
+* [#18](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/18) refactor: Implements dynamic joi schema generation from SDK types ([@scalvert](https://github.com/scalvert))
+
+#### :house: Internal
+* [#18](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/18) refactor: Implements dynamic joi schema generation from SDK types ([@scalvert](https://github.com/scalvert))
+
+#### Committers: 1
+- Steve Calvert ([@scalvert](https://github.com/scalvert))
+
+
 ## v0.6.0 (2025-07-17)
 
 
