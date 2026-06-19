@@ -5,6 +5,16 @@
 
 
 
+
+## v0.7.1 (2026-06-19)
+
+#### :bug: Bug Fix
+* [#19](https://github.com/scalvert/docusaurus-plugin-search-glean/pull/19) fix: remove broken client export ([@YfengJ](https://github.com/YfengJ))
+
+#### Committers: 1
+- YfengJ ([@YfengJ](https://github.com/YfengJ))
+
+
 ## v0.7.0 (2025-07-17)
 
 #### :rocket: Enhancement
